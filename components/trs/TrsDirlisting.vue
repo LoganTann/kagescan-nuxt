@@ -1,73 +1,118 @@
 <template>
-    <ul class="ml-1">
-        <li v-for="file in filesInDirectory" :key="file.id">
-            <span v-if="filesWithoutChildrens.has(file.id)">x</span>
-            <span v-else @click="handleOpenSubfiles(file.id)">
-                <span v-if="openedIds.has(file.id)">v</span>
-                <span v-else>&gt;</span>
-            </span>
-            <span class="truncate" @click="handleChangeDoc(file.id)">{{
-                file.title
-            }}</span>
+    <div :data-depth="props.depth">
+        <div v-for="file in filesInDir" :key="file.id">
+            <div
+                class="trs_filename"
+                :class="{ active: file.id === activeFile }"
+            >
+                <trs-dir-expand-btn
+                    :targeted-file="file"
+                    :opened-ids="openedIds"
+                    @dir-expand-state-change="handleDirExpandChange"
+                ></trs-dir-expand-btn>
+                <span @click="handleChangeDoc(file.id)">{{ file.title }}</span>
+            </div>
             <trs-dirlisting
                 v-if="openedIds.has(file.id)"
                 :all-files="allFiles"
                 :parent="file.id"
+                :active-file="props.activeFile"
+                :depth="props.depth + 1"
+                @change-doc="handleChangeDoc"
             ></trs-dirlisting>
-        </li>
-    </ul>
+        </div>
+    </div>
 </template>
+<script setup lang="ts">
+import { basicFileData } from "@/server/api/getDirectoryListing";
+import { PropType } from "vue";
 
-<script>
-export default {
-    name: "trs-dirlisting",
-    props: {
-        allFiles: {
-            type: Array,
-            required: true,
-            default: () => [{ id: 0, title: "error", parent: -1 }],
-        },
-        parent: {
-            type: Number,
-            required: false,
-            default: -1,
-        },
+const props = defineProps({
+    allFiles: {
+        type: Array as PropType<basicFileData[]>,
+        required: true,
+        default: () => [{ id: 0, title: "error", parent: -1 }],
     },
-    data() {
-        return {
-            filesInDirectory: [],
-            filesWithoutChildrens: null,
-            openedIds: new Set(),
-        };
+    parent: {
+        type: Number,
+        required: false,
+        default: -1,
     },
-    created() {
-        // note : won't listen to changes
-        const filesInDir = [];
-        const filesWithoutChildrens = new Set();
-        for (const file of this.allFiles) {
-            if (file.parent === this.parent) {
-                filesInDir.push(file);
-                filesWithoutChildrens.add(file.id);
-            }
-        }
-        for (const file of this.allFiles) {
-            filesWithoutChildrens.delete(file.parent);
-        }
+    activeFile: {
+        type: Number,
+        required: true,
+        default: -1,
+    },
+    depth: {
+        type: Number,
+        required: false,
+        default: 0,
+    },
+});
+const emit = defineEmits(["changeDoc"]);
 
-        this.filesInDirectory = filesInDir;
-        this.filesWithoutChildrens = filesWithoutChildrens;
-    },
-    methods: {
-        handleOpenSubfiles(id) {
-            this.openedIds.has(id)
-                ? this.openedIds.delete(id)
-                : this.openedIds.add(id);
-        },
-        handleChangeDoc(id) {
-            this.$emit("change-doc", id);
-        },
-    },
-};
+// data :
+const filesInDir = ref([]);
+const openedIds = ref(new Set<number>());
+
+function computeFilesInDir() {
+    filesInDir.value = props.allFiles
+        .filter((file) => file.parent === props.parent)
+        .sort((a, b) => a.filename.localeCompare(b.filename));
+}
+computeFilesInDir();
+// watch allfiles
+watch(
+    () => props.allFiles,
+    () => computeFilesInDir()
+);
+
+/**
+ * Propagates the changeDoc event
+ */
+function handleChangeDoc(id) {
+    emit("changeDoc", id);
+}
+/**
+ * Manages the expand/collapse state of the directory
+ */
+function handleDirExpandChange({
+    id,
+    action,
+}: {
+    id: number;
+    action: "open" | "close";
+}) {
+    if (action === "open") {
+        openedIds.value.add(id);
+    } else {
+        openedIds.value.delete(id);
+    }
+    console.log("opened ids changed", JSON.stringify(openedIds));
+}
 </script>
 
-<style></style>
+<style lang="scss">
+@use "assets/css/defs.scss";
+
+.trs_filename {
+    @include defs.trs_use_filename_color;
+    @include defs.trs_use_filename_font-size;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: lighter;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 2px;
+    padding-left: 5px;
+}
+.trs_filename > span {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+}
+.trs_filename:hover,
+.trs_filename.active {
+    @include defs.trs_use_selected_bg_color;
+}
+</style>

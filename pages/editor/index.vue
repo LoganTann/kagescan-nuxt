@@ -1,7 +1,7 @@
 <template>
     <div class="font-sans flex h-full">
         <div class="bg-neutral-50 w-60 flex flex-col">
-            <div class="flex p-2 items-center">
+            <div class="flex p-2 items-center trs_logo">
                 <img
                     src="/kagescan.png"
                     alt="Kagescan icon"
@@ -19,6 +19,8 @@
                 <trs-dirlisting
                     v-if="allFiles"
                     :all-files="allFiles.novel_chapters"
+                    :active-file="activeDoc"
+                    @change-doc="handleChangeDoc"
                 ></trs-dirlisting>
                 <span v-else>Files not loaded...</span>
             </div>
@@ -43,11 +45,20 @@
         </div>
     </div>
 </template>
-
+<style lang="scss">
+.trs_logo:hover,
+.trs_logo.active {
+    background-color: rgba(55, 53, 47, 0.08);
+}
+</style>
 <script setup lang="ts">
-import { ref } from "vue";
-
 const { data: allFiles } = await useFetch("/api/getDirectoryListing");
+
+const activeDoc = ref(-1);
+function handleChangeDoc(id) {
+    activeDoc.value = id;
+    console.log("Logan changedoc", id);
+}
 
 const inHTML = ref("");
 const outHTML = ref("");

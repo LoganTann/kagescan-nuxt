@@ -1,0 +1,13 @@
+
+@mixin trs_use_filename_color {
+    color: rgba(25, 23, 17, 0.6);
+}
+@mixin trs_use_filename_fill {
+    fill: rgba(25, 23, 17, 0.6);
+}
+@mixin trs_use_filename_font-size {
+    font-size: 15px;
+}
+@mixin trs_use_selected_bg_color {
+    background-color: rgba(55, 53, 47, 0.08);
+}

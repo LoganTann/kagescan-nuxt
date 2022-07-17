@@ -4,11 +4,6 @@
         @click="handleClick"
         :class="{ active: expanded }"
     >
-        <!--span v-if="filesWithoutChildrens.has(file.id)">x</span>
-            <span v-else @click="handleOpenSubfiles(file.id)">
-                <span v-if="openedIds.has(file.id)">v</span>
-                <span v-else>&gt;</span>
-            </span-->
         <svg viewBox="0 0 100 100">
             <polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon>
         </svg>
@@ -17,30 +12,29 @@
 <script setup lang="ts">
 import { basicFileData } from "@/server/api/getDirectoryListing";
 import { PropType } from "vue";
+import {
+    useGlobalState,
+    openedIds_add,
+    openedIds_has,
+    openedIds_remove,
+} from "@/stores/trsEditorFiles";
 
-const emit = defineEmits(["dirExpandStateChange"]);
+const state = useGlobalState();
 const props = defineProps({
     targetedFile: {
         type: Object as PropType<basicFileData>,
         required: true,
         default: () => [{ id: 0, title: "error", parent: -1 }],
     },
-    openedIds: {
-        type: Object as PropType<Set<number>>,
-        required: true,
-        default: () => new Set(),
-    },
 });
 
-const expanded = ref(props.openedIds.has(props.targetedFile.id));
-function handleClick() {
-    expanded.value = !expanded.value;
+const expanded = computed(() => openedIds_has(state, props.targetedFile.id));
 
-    if (props.targetedFile.hasChilds) {
-        emit("dirExpandStateChange", {
-            id: props.targetedFile.id,
-            action: expanded.value ? "open" : "close",
-        });
+function handleClick() {
+    if (expanded.value) {
+        openedIds_remove(state, props.targetedFile.id);
+    } else {
+        openedIds_add(state, props.targetedFile.id);
     }
 }
 </script>

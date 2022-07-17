@@ -28,7 +28,6 @@ const editor = useEditor({
     content: "<p>Loading...</p>",
     extensions: [StarterKit],
     onUpdate({ editor }) {
-        console.log("update");
         handleAutosave(editor);
     },
 });

@@ -18,7 +18,6 @@
   "dependencies": {
     "@tiptap/starter-kit": "^2.0.0-beta.191",
     "@tiptap/vue-3": "^2.0.0-beta.96",
-    "@vueuse/core": "^8.9.2",
-    "pinia": "^2.0.16"
+    "@vueuse/core": "^8.9.2"
   }
 }

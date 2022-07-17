@@ -1,46 +1,40 @@
 <template>
-    <div :data-depth="props.depth">
+    <div :style="depthStyleDef" data-component="trs-dirlisting">
         <div v-for="file in filesInDir" :key="file.id">
+            <!-- File Element -->
             <div
                 class="trs_filename"
-                :class="{ active: file.id === activeFile }"
+                :class="{ active: file.id === state.activeFile }"
             >
-                <trs-dir-expand-btn
-                    :targeted-file="file"
-                    :opened-ids="openedIds"
-                    @dir-expand-state-change="handleDirExpandChange"
-                ></trs-dir-expand-btn>
-                <span @click="handleChangeDoc(file.id)">{{ file.title }}</span>
+                <trs-dir-expand-btn :targeted-file="file"></trs-dir-expand-btn>
+                <span @click="handleChangeDoc(file.id)">{{
+                    file.filename
+                }}</span>
             </div>
+            <!-- Its childrens -->
             <trs-dirlisting
-                v-if="openedIds.has(file.id)"
-                :all-files="allFiles"
+                v-if="getExpandingStatusOf(file) === 'open'"
                 :parent="file.id"
-                :active-file="props.activeFile"
                 :depth="props.depth + 1"
-                @change-doc="handleChangeDoc"
             ></trs-dirlisting>
+            <div
+                v-if="getExpandingStatusOf(file) === 'no files'"
+                class="trs_filename"
+            >
+                <span>Pas de fichiers enfants</span>
+            </div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import { basicFileData } from "@/server/api/getDirectoryListing";
 import { PropType } from "vue";
+import { useGlobalState, openedIds_has } from "@/stores/trsEditorFiles";
 
 const props = defineProps({
-    allFiles: {
-        type: Array as PropType<basicFileData[]>,
-        required: true,
-        default: () => [{ id: 0, title: "error", parent: -1 }],
-    },
     parent: {
         type: Number,
         required: false,
-        default: -1,
-    },
-    activeFile: {
-        type: Number,
-        required: true,
         default: -1,
     },
     depth: {
@@ -49,46 +43,44 @@ const props = defineProps({
         default: 0,
     },
 });
-const emit = defineEmits(["changeDoc"]);
+const state = useGlobalState();
 
 // data :
 const filesInDir = ref([]);
-const openedIds = ref(new Set<number>());
+const depthStyleDef = `--depth: ${props.depth * 10 + 5}px;`;
 
 function computeFilesInDir() {
-    filesInDir.value = props.allFiles
+    filesInDir.value = state.value.allFiles
         .filter((file) => file.parent === props.parent)
         .sort((a, b) => a.filename.localeCompare(b.filename));
 }
 computeFilesInDir();
 // watch allfiles
 watch(
-    () => props.allFiles,
+    () => state.value.allFiles,
     () => computeFilesInDir()
 );
 
-/**
- * Propagates the changeDoc event
- */
-function handleChangeDoc(id) {
-    emit("changeDoc", id);
-}
-/**
- * Manages the expand/collapse state of the directory
- */
-function handleDirExpandChange({
-    id,
-    action,
-}: {
-    id: number;
-    action: "open" | "close";
-}) {
-    if (action === "open") {
-        openedIds.value.add(id);
-    } else {
-        openedIds.value.delete(id);
+function getExpandingStatusOf(file: basicFileData) {
+    if (!openedIds_has(state, file.id)) {
+        return "closed";
     }
-    console.log("opened ids changed", JSON.stringify(openedIds));
+    if (file.hasChilds) {
+        return "open";
+    } else {
+        return "no files";
+    }
+}
+
+function handleChangeDoc(id: number) {
+    state.value.activeFile = id;
+    console.log("active file changed", id);
+}
+function handleLeftClick(e: MouseEvent) {
+    console.log("e right", e);
+}
+function handleRightClick(e: MouseEvent) {
+    console.log("e left", e);
 }
 </script>
 
@@ -104,7 +96,7 @@ function handleDirExpandChange({
     font-size: 14px;
     font-weight: 500;
     border-radius: 2px;
-    padding-left: 5px;
+    padding-left: var(--depth);
 }
 .trs_filename > span {
     padding-top: 2px;

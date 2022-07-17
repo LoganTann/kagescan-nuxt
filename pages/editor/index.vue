@@ -16,12 +16,7 @@
             </ul>
             <hr />
             <div class="flex-1">
-                <trs-dirlisting
-                    v-if="allFiles"
-                    :all-files="allFiles.novel_chapters"
-                    :active-file="activeDoc"
-                    @change-doc="handleChangeDoc"
-                ></trs-dirlisting>
+                <trs-dirlisting v-if="state.allFiles"></trs-dirlisting>
                 <span v-else>Files not loaded...</span>
             </div>
 
@@ -52,13 +47,10 @@
 }
 </style>
 <script setup lang="ts">
+import { useGlobalState } from "@/stores/trsEditorFiles";
+const state = useGlobalState();
 const { data: allFiles } = await useFetch("/api/getDirectoryListing");
-
-const activeDoc = ref(-1);
-function handleChangeDoc(id) {
-    activeDoc.value = id;
-    console.log("Logan changedoc", id);
-}
+state.value.allFiles = allFiles.value.novel_chapters;
 
 const inHTML = ref("");
 const outHTML = ref("");

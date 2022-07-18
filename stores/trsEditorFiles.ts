@@ -1,30 +1,42 @@
 import { createGlobalState, useStorage } from "@vueuse/core";
-import { basicFileData } from "~~/server/api/getDirectoryListing";
+import { basicFileData } from "@/server/api/getDirectoryListing";
+import superjson from "superjson";
+import { lang } from "@/server/api/articleContent/__utils";
 
 export const useGlobalState = createGlobalState(() =>
-    useStorage("state-trsEditorFiles", {
-        activeFile: -1,
-        openedIds: "",
-        allFiles: new Array<basicFileData>(),
-    })
+    useStorage(
+        "state-trsEditorFiles",
+        {
+            activeFile: -1,
+            allFiles: new Array<basicFileData>(),
+            // only openedIds should be peristed
+            openedIds: new Set<number>(),
+        },
+        undefined,
+        {
+            serializer: {
+                read: (raw) => superjson.parse(raw),
+                write: (val) => superjson.stringify(val),
+            },
+        }
+    )
 );
 
-// Workaround https://github.com/vueuse/vueuse/issues/1939
 export function openedIds_has(
     state: ReturnType<typeof useGlobalState>,
     id: number
 ) {
-    return state.value.openedIds.includes(`[${id}]`);
+    return state.value.openedIds.has(id);
 }
 export function openedIds_add(
     state: ReturnType<typeof useGlobalState>,
     id: number
 ) {
-    state.value.openedIds = state.value.openedIds.concat(`[${id}]`);
+    state.value.openedIds.add(id);
 }
 export function openedIds_remove(
     state: ReturnType<typeof useGlobalState>,
     id: number
 ) {
-    state.value.openedIds = state.value.openedIds.replace(`[${id}]`, "");
+    state.value.openedIds.delete(id);
 }

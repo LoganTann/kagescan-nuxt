@@ -1,7 +1,6 @@
 <template>
     <div>
         <editor-content :editor="editor" @update="handleAutosave" />
-        <p>Editor</p>
     </div>
 </template>
 
@@ -11,6 +10,17 @@ import { useEditor, EditorContent } from "@tiptap/vue-3";
 import { Editor } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 
+const props = defineProps({
+    content: {
+        type: String,
+        required: false,
+    },
+    docId: {
+        type: Number,
+        required: false,
+    },
+});
+
 const emit = defineEmits(["update"]);
 
 let autosaveTimer = null;
@@ -19,8 +29,10 @@ function handleAutosave(editor: Editor) {
     if (autosaveTimer) {
         clearTimeout(autosaveTimer);
     }
+    const content = "" + editor.getHTML();
+    const docId = 0 + props.docId;
     autosaveTimer = setTimeout(() => {
-        emit("update", editor.getHTML());
+        emit("update", { content, docId });
     }, autosaveCooldown);
 }
 
@@ -32,12 +44,6 @@ const editor = useEditor({
     },
 });
 
-const props = defineProps({
-    content: {
-        type: String,
-        required: false,
-    },
-});
 watch(
     () => props.content,
     (newString) => {

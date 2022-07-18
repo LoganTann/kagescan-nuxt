@@ -2,7 +2,7 @@
     <div
         class="trs_expandbtn"
         @click="handleClick"
-        :class="{ active: expanded }"
+        :class="{ active: expanded, empty: !targetedFile.hasChilds }"
     >
         <svg viewBox="0 0 100 100">
             <polygon points="5.9,88.2 50,11.8 94.1,88.2 "></polygon>
@@ -60,6 +60,9 @@ function handleClick() {
     @include defs.trs_use_filename_fill;
     transform: rotate(90deg);
     transition: transform 0.2s ease-in-out;
+}
+.trs_expandbtn.empty svg {
+    opacity: 0.5;
 }
 .trs_expandbtn.active svg {
     transform: rotate(180deg);

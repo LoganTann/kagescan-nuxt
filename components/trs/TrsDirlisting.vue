@@ -21,7 +21,7 @@
                 v-if="getExpandingStatusOf(file) === 'no files'"
                 class="trs_filename"
             >
-                <span>Pas de fichiers enfants</span>
+                <span><span class="ml-4">*</span> Pas de fichiers enfants</span>
             </div>
         </div>
     </div>
@@ -29,7 +29,11 @@
 <script setup lang="ts">
 import { basicFileData } from "@/server/api/getDirectoryListing";
 import { PropType } from "vue";
-import { useGlobalState, openedIds_has } from "@/stores/trsEditorFiles";
+import {
+    useGlobalState,
+    openedIds_has,
+    openedIds_add,
+} from "@/stores/trsEditorFiles";
 
 const props = defineProps({
     parent: {
@@ -97,14 +101,19 @@ function handleRightClick(e: MouseEvent) {
     font-weight: 500;
     border-radius: 2px;
     padding-left: var(--depth);
-}
-.trs_filename > span {
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 2px;
-}
-.trs_filename:hover,
-.trs_filename.active {
-    @include defs.trs_use_selected_bg_color;
+
+    & > span {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 2px;
+    }
+    &.active > span {
+        @include defs.trs_use_filename_color_selected;
+    }
+
+    &:hover,
+    &.active {
+        @include defs.trs_use_selected_bg_color;
+    }
 }
 </style>

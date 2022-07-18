@@ -1,7 +1,7 @@
 <template>
     <div class="font-sans flex h-full">
         <div class="bg-neutral-50 w-60 flex flex-col">
-            <div class="flex p-2 items-center trs_logo">
+            <div class="flex p-2 items-center hoverable">
                 <img
                     src="/kagescan.png"
                     alt="Kagescan icon"
@@ -11,8 +11,8 @@
             </div>
 
             <ul>
-                <li>Planifications</li>
-                <li>Paramètres</li>
+                <li class="pl-4 hoverable">Planifications</li>
+                <li class="pl-4 hoverable">Paramètres</li>
             </ul>
             <hr />
             <div class="flex-1">
@@ -20,44 +20,21 @@
                 <span v-else>Files not loaded...</span>
             </div>
 
-            <div>Version 2.0.0</div>
+            <div class="pl-4">Version 2.0.0</div>
         </div>
-
-        <div class="max-w-3xl mx-auto p-2">
-            <h2>Article title :</h2>
-            <p>blablabla</p>
-            <client-only>
-                <trs-tiptap
-                    @update="handleUpdate"
-                    :content="inHTML"
-                ></trs-tiptap>
-
-                <button @click="handleEditorChange">
-                    change editor content
-                </button>
-                <textarea v-model="outHTML"> </textarea>
-            </client-only>
-        </div>
+        <trs-editor-container></trs-editor-container>
     </div>
 </template>
 <style lang="scss">
-.trs_logo:hover,
-.trs_logo.active {
+.hoverable:hover,
+.hoverable.active {
     background-color: rgba(55, 53, 47, 0.08);
 }
 </style>
 <script setup lang="ts">
 import { useGlobalState } from "@/stores/trsEditorFiles";
 const state = useGlobalState();
+
 const { data: allFiles } = await useFetch("/api/getDirectoryListing");
 state.value.allFiles = allFiles.value.novel_chapters;
-
-const inHTML = ref("");
-const outHTML = ref("");
-function handleUpdate(e) {
-    outHTML.value = e;
-}
-function handleEditorChange(e) {
-    inHTML.value = "" + outHTML.value;
-}
 </script>

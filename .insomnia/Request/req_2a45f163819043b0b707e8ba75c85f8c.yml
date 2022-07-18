@@ -1,0 +1,29 @@
+_id: req_2a45f163819043b0b707e8ba75c85f8c
+type: Request
+parentId: fld_aabaf03fd3404322bbac044ab70a05af
+modified: 1658158534931
+created: 1658152435599
+url: http://localhost:3000/api/articleContent/1
+name: ACT 1 -> 200
+description: ""
+method: PUT
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"innerHTML": "<p>TOTO 1234</p>"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_57ad5f8e147244fa8503a9a208cf811c
+authentication: {}
+metaSortKey: -1658142321530
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

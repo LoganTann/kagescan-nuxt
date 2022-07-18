@@ -1,0 +1,29 @@
+_id: req_d844bdec483d495e9b660d1c4bbd563f
+type: Request
+parentId: fld_aabaf03fd3404322bbac044ab70a05af
+modified: 1658184992829
+created: 1658184946753
+url: http://localhost:3000/api/articleContent/3
+name: ACT 4 -> 200
+description: ""
+method: GET
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"innerHTML": "<p>TOTO 1234</p>"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_57ad5f8e147244fa8503a9a208cf811c
+authentication: {}
+metaSortKey: -1658142321455
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

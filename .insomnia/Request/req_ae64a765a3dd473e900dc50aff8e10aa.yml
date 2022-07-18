@@ -1,0 +1,21 @@
+_id: req_ae64a765a3dd473e900dc50aff8e10aa
+type: Request
+parentId: fld_aabaf03fd3404322bbac044ab70a05af
+modified: 1658151887111
+created: 1658151867538
+url: http://localhost:3000/api/articleContent/1
+name: ACT no body -> 400
+description: ""
+method: PUT
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1658151867538
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

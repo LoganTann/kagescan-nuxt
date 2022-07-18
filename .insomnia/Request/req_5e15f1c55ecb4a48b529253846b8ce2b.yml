@@ -1,0 +1,30 @@
+_id: req_5e15f1c55ecb4a48b529253846b8ce2b
+type: Request
+parentId: fld_aabaf03fd3404322bbac044ab70a05af
+modified: 1658184599892
+created: 1658157970902
+url: http://localhost:3000/api/articleContent/1
+name: ACT 1 force update -> 200
+description: ""
+method: PUT
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"innerHTML": "<p>TOTO 456</p>",
+    	"id": 13
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_57ad5f8e147244fa8503a9a208cf811c
+authentication: {}
+metaSortKey: -1658142321505
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

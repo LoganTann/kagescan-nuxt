@@ -1,0 +1,29 @@
+_id: req_5edd14c8952f4b85b0d35322f68817cd
+type: Request
+parentId: fld_aabaf03fd3404322bbac044ab70a05af
+modified: 1658152414461
+created: 1658151987780
+url: http://localhost:3000/api/articleContent/9999
+name: ACT 9999 -> 404
+description: ""
+method: PUT
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"innerHTML": "<p>Hello world</p>"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_57ad5f8e147244fa8503a9a208cf811c
+authentication: {}
+metaSortKey: -1658145492826
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

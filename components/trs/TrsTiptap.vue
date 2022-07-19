@@ -39,6 +39,11 @@ function handleAutosave(editor: Editor) {
 const editor = useEditor({
     content: "<p>Loading...</p>",
     extensions: [StarterKit],
+    editorProps: {
+        attributes: {
+            class: "prose prose-sm sm:prose-base prose-headings:font-sans focus:outline-none",
+        },
+    },
     onUpdate({ editor }) {
         handleAutosave(editor);
     },

@@ -1,6 +1,6 @@
 <template>
     <div class="font-sans flex h-full">
-        <div class="bg-neutral-50 w-60 flex flex-col">
+        <div class="bg-neutral-50 w-60 min-w-60 flex flex-col">
             <div class="flex p-2 items-center hoverable">
                 <img
                     src="/kagescan.png"

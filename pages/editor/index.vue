@@ -1,6 +1,6 @@
 <template>
     <div class="font-sans flex h-full">
-        <div class="bg-neutral-50 w-60 min-w-60 flex flex-col">
+        <div class="bg-neutral-50 flex flex-col min-w-60">
             <div class="flex p-2 items-center hoverable">
                 <img
                     src="/kagescan.png"
@@ -15,10 +15,10 @@
                 <li class="pl-4 hoverable">Paramètres</li>
             </ul>
             <hr />
-            <div class="flex-1">
+            <trs-dir-click-watcher>
                 <trs-dirlisting v-if="state.allFiles"></trs-dirlisting>
                 <span v-else>Files not loaded...</span>
-            </div>
+            </trs-dir-click-watcher>
 
             <div class="pl-4">Version 2.0.0</div>
         </div>
@@ -26,15 +26,22 @@
     </div>
 </template>
 <style lang="scss">
+.hoverable {
+    cursor: pointer;
+}
 .hoverable:hover,
 .hoverable.active {
     background-color: rgba(55, 53, 47, 0.08);
 }
+.min-w-60 {
+    min-width: 15rem;
+    width: 15rem;
+}
 </style>
 <script setup lang="ts">
-import { useGlobalState } from "@/stores/trsEditorFiles";
-const state = useGlobalState();
+import { useReactiveGlobalState } from "@/stores/trsEditorFiles";
+const state = useReactiveGlobalState();
 
 const { data: allFiles } = await useFetch("/api/getDirectoryListing");
-state.value.allFiles = allFiles.value.novel_chapters;
+state.allFiles.value = allFiles.value.novel_chapters;
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div
         class="trs_expandbtn"
-        @click="handleClick"
+        :data-do-expand-file="targetedFile.id"
         :class="{ active: expanded, empty: !targetedFile.hasChilds }"
     >
         <svg viewBox="0 0 100 100">
@@ -12,14 +12,9 @@
 <script setup lang="ts">
 import { basicFileData } from "@/server/api/getDirectoryListing";
 import { PropType } from "vue";
-import {
-    useGlobalState,
-    openedIds_add,
-    openedIds_has,
-    openedIds_remove,
-} from "@/stores/trsEditorFiles";
+import { useReactiveGlobalState } from "@/stores/trsEditorFiles";
 
-const state = useGlobalState();
+const state = useReactiveGlobalState();
 const props = defineProps({
     targetedFile: {
         type: Object as PropType<basicFileData>,
@@ -28,31 +23,19 @@ const props = defineProps({
     },
 });
 
-const expanded = computed(() => openedIds_has(state, props.targetedFile.id));
-
-function handleClick() {
-    if (expanded.value) {
-        openedIds_remove(state, props.targetedFile.id);
-    } else {
-        openedIds_add(state, props.targetedFile.id);
-    }
-}
+const expanded = computed(() =>
+    state.openedIds.value.has(props.targetedFile.id)
+);
 </script>
 
 <style lang="scss">
 @use "assets/css/defs.scss";
 
 .trs_expandbtn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-    margin: 4px;
-    border-radius: 2px;
-    &:hover {
-        @include defs.trs_use_selected_bg_color;
-    }
+    @include defs.tsr_use_file_btn_container;
+}
+.trs_expandbtn:hover {
+    @include defs.trs_use_selected_bg_color;
 }
 .trs_expandbtn svg {
     width: 10px;

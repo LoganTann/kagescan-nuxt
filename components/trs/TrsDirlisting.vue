@@ -4,12 +4,11 @@
             <!-- File Element -->
             <div
                 class="trs_filename"
-                :class="{ active: file.id === state.activeFile }"
+                :data-do-change-file="file.id"
+                :class="{ active: file.id === state.activeFile.value }"
             >
                 <trs-dir-expand-btn :targeted-file="file"></trs-dir-expand-btn>
-                <span @click="handleChangeDoc(file.id)">{{
-                    file.filename
-                }}</span>
+                <span>{{ file.filename }}</span>
             </div>
             <!-- Its childrens -->
             <trs-dirlisting
@@ -24,16 +23,13 @@
                 <span><span class="ml-4">*</span> Pas de fichiers enfants</span>
             </div>
         </div>
+        <trs-btn-new-category :parentData="parentData"></trs-btn-new-category>
     </div>
 </template>
 <script setup lang="ts">
 import { basicFileData } from "@/server/api/getDirectoryListing";
-import { PropType } from "vue";
-import {
-    useGlobalState,
-    openedIds_has,
-    openedIds_add,
-} from "@/stores/trsEditorFiles";
+import { PropType, Ref } from "vue";
+import { useReactiveGlobalState } from "@/stores/trsEditorFiles";
 
 const props = defineProps({
     parent: {
@@ -47,26 +43,38 @@ const props = defineProps({
         default: 0,
     },
 });
-const state = useGlobalState();
+
+const state = useReactiveGlobalState();
 
 // data :
 const filesInDir = ref([]);
+const parentData: Ref<basicFileData | null> = ref(null);
 const depthStyleDef = `--depth: ${props.depth * 10 + 5}px;`;
 
 function computeFilesInDir() {
-    filesInDir.value = state.value.allFiles
-        .filter((file) => file.parent === props.parent)
-        .sort((a, b) => a.filename.localeCompare(b.filename));
+    const _filesInDir = new Array();
+    for (const file of state.allFiles.value) {
+        if (file.parent === props.parent) {
+            _filesInDir.push(file);
+        }
+        if (file.id === props.parent) {
+            parentData.value = file;
+        }
+    }
+
+    filesInDir.value = _filesInDir.sort((a, b) =>
+        a.filename.localeCompare(b.filename)
+    );
 }
 computeFilesInDir();
 // watch allfiles
 watch(
-    () => state.value.allFiles,
+    () => state.allFiles.value,
     () => computeFilesInDir()
 );
 
 function getExpandingStatusOf(file: basicFileData) {
-    if (!openedIds_has(state, file.id)) {
+    if (!state.openedIds.value.has(file.id)) {
         return "closed";
     }
     if (file.hasChilds) {
@@ -74,17 +82,6 @@ function getExpandingStatusOf(file: basicFileData) {
     } else {
         return "no files";
     }
-}
-
-function handleChangeDoc(id: number) {
-    state.value.activeFile = id;
-    console.log("active file changed", id);
-}
-function handleLeftClick(e: MouseEvent) {
-    console.log("e right", e);
-}
-function handleRightClick(e: MouseEvent) {
-    console.log("e left", e);
 }
 </script>
 
@@ -101,6 +98,7 @@ function handleRightClick(e: MouseEvent) {
     font-weight: 500;
     border-radius: 2px;
     padding-left: var(--depth);
+    cursor: pointer;
 
     & > span {
         padding-top: 2px;

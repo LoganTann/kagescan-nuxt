@@ -14,10 +14,10 @@
     </div>
 </template>
 <script setup lang="ts">
-import { useGlobalState } from "@/stores/trsEditorFiles";
+import { useReactiveGlobalState } from "@/stores/trsEditorFiles";
 import { articleContentGetReponse } from "@/server/api/articleContent/[id].get";
 
-const state = useGlobalState();
+const state = useReactiveGlobalState();
 
 const title = ref("Hello");
 const inHTML = ref("<p>Hello</p>");
@@ -26,7 +26,7 @@ const docId = ref(-1);
 // todo : abort controller instead
 const lastNewVal = ref(-1);
 watch(
-    () => state.value.activeFile,
+    () => state.activeFile.value,
     async (newVal) => {
         lastNewVal.value = newVal;
         const req = await fetch(`/api/articleContent/${newVal}`);

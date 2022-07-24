@@ -14,3 +14,12 @@
 @mixin trs_use_selected_bg_color {
     background-color: rgba(55, 53, 47, 0.08);
 }
+@mixin tsr_use_file_btn_container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin: 4px;
+    border-radius: 2px;
+}

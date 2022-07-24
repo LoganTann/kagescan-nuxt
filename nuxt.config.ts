@@ -4,11 +4,5 @@ import { defineNuxtConfig } from "nuxt";
 export default defineNuxtConfig({
     modules: ["@nuxtjs/supabase", "@nuxtjs/tailwindcss"],
     components: true,
-    googleFonts: {
-        families: {
-            Roboto: true,
-            Lato: true,
-        },
-    },
     css: ["~/assets/css/main.css"],
 });

@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto+Flex:opsz@8..144&display=swap');
+
+/* fallback */
+@font-face {
+    font-family: 'Material Symbols Outlined';
+    font-style: normal;
+    font-weight: 100 700;
+    src: url(https://fonts.gstatic.com/s/materialsymbolsoutlined/v26/kJEhBvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oFsI.woff2) format('woff2');
+}
+
 html,
 body,
 #__nuxt {
@@ -6,13 +16,8 @@ body,
     height: 100%;
     width: 100%;
 }
-/* fallback */
-@font-face {
-    font-family: 'Material Symbols Outlined';
-    font-style: normal;
-    font-weight: 100 700;
-    src: url(https://fonts.gstatic.com/s/materialsymbolsoutlined/v26/kJEhBvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oFsI.woff2) format('woff2');
-}
+
+
 
 .icon {
     font-family: 'Material Symbols Outlined';

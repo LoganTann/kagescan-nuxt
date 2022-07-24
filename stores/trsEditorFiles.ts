@@ -1,16 +1,20 @@
 import { createGlobalState, useStorage } from "@vueuse/core";
 import { basicFileData } from "@/server/api/getDirectoryListing";
 import superjson from "superjson";
-import { lang } from "@/server/api/articleContent/__utils";
+import { ref } from "vue";
 
-export const useGlobalState = createGlobalState(() =>
+export const useReactiveGlobalState = createGlobalState(() => {
+    const activeFile = ref(-1);
+    const allFiles = ref<basicFileData[]>([]);
+    const openedIds = ref(new Set<number>());
+    return { activeFile, allFiles, openedIds };
+});
+
+export const usePersistedGlobalState = createGlobalState(() =>
     useStorage(
         "state-trsEditorFiles",
         {
-            activeFile: -1,
-            allFiles: new Array<basicFileData>(),
-            // only openedIds should be peristed
-            openedIds: new Set<number>(),
+            // nothing yet
         },
         undefined,
         {
@@ -21,22 +25,3 @@ export const useGlobalState = createGlobalState(() =>
         }
     )
 );
-
-export function openedIds_has(
-    state: ReturnType<typeof useGlobalState>,
-    id: number
-) {
-    return state.value.openedIds.has(id);
-}
-export function openedIds_add(
-    state: ReturnType<typeof useGlobalState>,
-    id: number
-) {
-    state.value.openedIds.add(id);
-}
-export function openedIds_remove(
-    state: ReturnType<typeof useGlobalState>,
-    id: number
-) {
-    state.value.openedIds.delete(id);
-}

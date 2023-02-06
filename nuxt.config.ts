@@ -15,5 +15,9 @@ export default defineNuxtConfig({
     typescript: {
         shim: false
     },
-    modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt'],
+    modules: [
+        '@nuxtjs/tailwindcss',
+        '@vueuse/nuxt',
+        '@nuxt/content'
+    ],
 })

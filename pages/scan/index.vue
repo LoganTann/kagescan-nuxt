@@ -1,3 +1,3 @@
 <template>
-    Hello world
+    <p>Liste des séries</p>
 </template>

@@ -1,21 +1,20 @@
-# Kagescan.fr but using nuxt and supabase - Proof of concept
+# Nuxt 3 Minimal Starter
 
-Currently, the only goal is to create the CMS editor (kagescan translations workspace).
-
-Therefore, the software architecture is not made to be perfect.
-
-This project uses [Nuxt 3](https://v3.nuxtjs.org).
-
-**Composition or Options ?** : Since I'm learning Nuxt 3, I try to use as much as possible the Composition API. However, the Options API is definitely more intuitive so don't be surprised if I use it.
+Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
 
 Make sure to install the dependencies:
 
 ```bash
+# yarn
 yarn install
 
-# or npm install
+# npm
+npm install
+
+# pnpm
+pnpm install
 ```
 
 ## Development Server
@@ -23,7 +22,7 @@ yarn install
 Start the development server on http://localhost:3000
 
 ```bash
-yarn dev # or npm run dev
+npm run dev
 ```
 
 ## Production
@@ -31,5 +30,13 @@ yarn dev # or npm run dev
 Build the application for production:
 
 ```bash
-yarn build # or npm run build
+npm run build
 ```
+
+Locally preview production build:
+
+```bash
+npm run preview
+```
+
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

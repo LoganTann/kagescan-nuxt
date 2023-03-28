@@ -1,8 +1,23 @@
-import { defineNuxtConfig } from "nuxt";
-
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    modules: ["@nuxtjs/supabase", "@nuxtjs/tailwindcss"],
-    components: true,
-    css: ["~/assets/css/main.css"],
-});
+    app: {
+        head: {
+            link: [
+                {
+                    rel: 'stylesheet',
+                    //href: 'https://fonts.googleapis.com/css2?family=Raleway&display=swap'
+                    href: 'https://fonts.googleapis.com/css2?family=Open+Sans'
+                },
+                { rel: 'preconnect', href: 'https://fonts.gstatic.com' }
+            ],
+        }
+    },
+    typescript: {
+        shim: false
+    },
+    modules: [
+        '@nuxtjs/tailwindcss',
+        '@vueuse/nuxt',
+        '@nuxt/content'
+    ],
+})

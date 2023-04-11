@@ -1,24 +1,20 @@
 <template>
-    <pre>
-        <!-- <NuxtLink :to="links.current._path">{{links.current.title}}</NuxtLink> -->
-        {{ nav }}
-    </pre>
+    <NuxtLink v-if="props.episodeData.previousEpisode" :to="props.episodeData.previousEpisode._path">
+        {{ props.episodeData.previousEpisode.title }} &lt;
+    </NuxtLink>
+    <span>{{ props.episodeData.currentEpisode?.title }}</span>
+    <NuxtLink v-if="props.episodeData.nextEpisode" :to="props.episodeData.nextEpisode._path">
+        &gt;
+        {{ props.episodeData.nextEpisode.title }}
+    </NuxtLink>
+    <br />
+    <NuxtLink to="./">Revenir à la liste des épisodes</NuxtLink>
 </template>
 <script setup lang="ts">
-    const route = useRoute();
-    const path = "anime/" + route.params.slug[0];
-    const parentRoute = queryContent("anime/" + route.params.slug[0] + "/");
-    const nav = await fetchContentNavigation(parentRoute);
+    import { AnimeEpisodePageData } from "~/composables/useAnime";
 
-    // const links = computed(() => {
-    //     if (!nav) return [];
-    //     // assumes no trailing slashes
-    //     const currentIndex = nav.findIndex((val) => route.path == val._path);
-    //     const previous = currentIndex - 1 < 0 ? null : nav[currentIndex - 1];
-    //     const next = currentIndex + 1 >= nav.length ? null : nav[currentIndex - 1];
-    //     const current = nav[currentIndex];
-
-    //     return { previous, current, next };
-    // });
+    const props = defineProps<{
+        episodeData: AnimeEpisodePageData;
+    }>();
 </script>
 <style scoped lang="scss"></style>

@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-white/75 sticky top-0 z-30 backdrop-blur-md">
+    <nav class="bg-white/75" :class="navClasses">
         <div class="flex items-center h-20 mx-auto md:w-11/12 lg:w-9/12 max-w-7xl px-1 sm:px-3 md:px-10">
             <div class="flex items-center flex-1 justify-center md:justify-start">
                 <NuxtLink to="">
@@ -17,3 +17,15 @@
         </div>
     </nav>
 </template>
+<script setup lang="ts">
+    const props = defineProps<{
+        notSticky?: boolean;
+    }>();
+
+    const navClasses = computed(() => {
+        if (props.notSticky) {
+            return "";
+        }
+        return "sticky top-0 z-30 backdrop-blur-md";
+    });
+</script>

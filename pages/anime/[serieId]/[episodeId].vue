@@ -1,14 +1,19 @@
 <template>
     <main>
-        <p>Kagescan Animés</p>
-        <AnimeNavigationLinks :episodeData="episodeData"></AnimeNavigationLinks>
-        <AnimePlayerContainer v-if="currentPlayer" :toPlay="currentPlayer" />
-        <div v-else>Erreur de format</div>
+        <Grid row>
+            <Grid col="s12 l8">
+                <AnimeMainContent :page-data="pageData"></AnimeMainContent>
+            </Grid>
+            <Grid col="s12 l3">
+                <AnimeSideContent :page-data="pageData" />
+            </Grid>
+        </Grid>
     </main>
 </template>
 <script setup lang="ts">
     const route = useRoute();
-    const { serieId, episodeId } = route.params;
-    const episodeData = await useAnimeEpisode(serieId as string, episodeId as string);
-    const currentPlayer = computed(() => episodeData.currentEpisode?.players[0]);
+    const serieId = route.params.serieId as string;
+    const episodeId = route.params.episodeId as string;
+
+    const pageData = useAnimeData(serieId, episodeId);
 </script>

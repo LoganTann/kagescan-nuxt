@@ -1,25 +1,69 @@
-import type { ParsedContent } from "@nuxt/content/dist/runtime/types";
+import type { ParsedContentMeta } from "@nuxt/content/dist/runtime/types";
 
-export interface AnimeParsedContent extends ParsedContent {
-    kgs_layout: string;
+/**
+ * Returns all the data needed for an anime episode page (route : /anime/[serieId]/[episodeId])
+ * Error not handled at the moment
+ * @param serieId the nuxt content folder name that contains the serie
+ * @param episodeId the nuxt content file name of the episode
+ * @return array having the content of the episode in {episodeData} and the serie metadata with episode list in {serieData}
+ */
+export function useAnimeData(serieId: string, episodeId: string) {
+    const episodeData = ref<AnimeEpisodeMetadata>();
+    const serieData = ref<AnimeSerieWithEpisodeList>();
+
+    fetchAnimeEpisode(serieId, episodeId)
+        .then((data) => episodeData.value = data);
+    fetchAnimeSerie(serieId)
+        .then((data) => serieData.value = data);
+
+    return { episodeData, serieData };
+}
+
+export type AnimeEpisodeAndSerieData = ReturnType<typeof useAnimeData>;
+
+export interface AnimeSerieMetadata extends ParsedContentMeta {
+    kgs_layout: "anime_page",
+    title: string,
+    subtitle: string,
+    poster: string,
+    description: string,
+}
+export interface AnimeEpisodeMetadata extends ParsedContentMeta {
+    kgs_layout: "anime_episode",
+    title: string,
+    description: string,
+    thumb: string,
     players: [
         {
-            player: string;
-            url: string;
+            player: string,
+            url: string
         }
-    ];
+    ],
+};
+
+export interface AnimeSerieWithEpisodeList {
+    title: string
+    subtitle: string
+    poster: string
+    videos: AnimeSerieVideoNode[]
 }
-export interface AnimeEpisodePageData {
-    previousEpisode?: AnimeParsedContent;
-    currentEpisode?: AnimeParsedContent;
-    nextEpisode?: AnimeParsedContent;
-    episodeList: AnimeParsedContent[];
+export interface AnimeSerieVideoNode {
+    path: string;
+    title: string;
+    subtitle: string;
+    thumb: string;
 }
+
+function isAnimeEpisodeMeta(entry: AnimeEpisodeMetadata | AnimeSerieMetadata): entry is AnimeSerieMetadata {
+    return entry.kgs_layout === "anime_page";
+}
+type AnimeEpisodeOrSerieArray = Array<AnimeEpisodeMetadata | AnimeSerieMetadata>;
+
 
 /**
  * Folder @/content/anime
  */
-const ANIME_FOLDER = '/anime'
+const ANIME_FOLDER = '/anime';
 
 function buildAnimePath(serieId?: string, episodeId?: string) {
     if (!serieId) {
@@ -31,42 +75,44 @@ function buildAnimePath(serieId?: string, episodeId?: string) {
     return `${ANIME_FOLDER}/${serieId}/${episodeId}`;
 }
 
-/**
- * Returns all episodes
- * @param serieId The anime ID
- */
-export async function useAnimeSerie(serieId: string): Promise<AnimeParsedContent[]> {
+async function fetchAnimeSerie(serieId: string): Promise<AnimeSerieWithEpisodeList> {
     const serieUrl = buildAnimePath(serieId);
-    const episodeList = await queryContent<AnimeParsedContent>(serieUrl)
-        .only(["_id", "_path", "_dir", "title", "description", "kgs_layout", "players"])
+    const episodeAndSerie: AnimeEpisodeOrSerieArray = await queryContent<AnimeEpisodeMetadata | AnimeSerieMetadata>(serieUrl)
+        .without("body")
         .where({
-            kgs_layout: "anime_episode"
+            kgs_layout: {
+                $in: ['anime_episode', 'anime_page']
+            }
         })
-        .find() as AnimeParsedContent[];
-    return episodeList;
+        .find() as AnimeEpisodeOrSerieArray;
+    const serie: AnimeSerieWithEpisodeList = {
+        title: "",
+        subtitle: "",
+        poster: "",
+        videos: []
+    };
+
+    for (const episode of episodeAndSerie) {
+        if (isAnimeEpisodeMeta(episode)) {
+            serie.title = episode.title;
+            serie.poster = episode.poster;
+            serie.subtitle = episode.subtitle;
+        } else {
+            const video: AnimeSerieVideoNode = {
+                path: episode._path as string,
+                title: episode.title,
+                subtitle: "",
+                thumb: episode.thumb,
+            }
+            serie.videos.push(video);
+        }
+    }
+
+    return serie;
 }
 
-/**
- * Returns the current anime episode based on the route.
- * Assumes it is called on the following route : /anime/[serieId]/[episodeId]
- * Will throw 404 error when the page does not exists in the content directory
- */
-export async function useAnimeEpisode(serieId: string, episodeId: string): Promise<AnimeEpisodePageData> {
-    const allEpisodes = await useAnimeSerie(serieId);
-    const currentPath = buildAnimePath(serieId, episodeId);
-    const result: AnimeEpisodePageData = {
-        episodeList: allEpisodes
-    };
-    for (const episode of allEpisodes) {
-        if (result.currentEpisode) {
-            result.nextEpisode = episode;
-            break;
-        }
-        if (episode._path === currentPath) {
-            result.currentEpisode = episode;
-            continue;
-        }
-        result.previousEpisode = episode;
-    }
-    return result;
+async function fetchAnimeEpisode(serieId: string, episodeId: string): Promise<AnimeEpisodeMetadata> {
+    const serieUrl = buildAnimePath(serieId, episodeId);
+    const episodeAndSerie = await queryContent<AnimeEpisodeMetadata>(serieUrl).findOne();
+    return episodeAndSerie;
 }

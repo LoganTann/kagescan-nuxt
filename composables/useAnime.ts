@@ -7,14 +7,16 @@ import type { ParsedContentMeta } from "@nuxt/content/dist/runtime/types";
  * @param episodeId the nuxt content file name of the episode
  * @return array having the content of the episode in {episodeData} and the serie metadata with episode list in {serieData}
  */
-export function useAnimeData(serieId: string, episodeId: string) {
+export function useAnimeData(serieId: string, episodeId?: string) {
     const episodeData = ref<AnimeEpisodeMetadata>();
     const serieData = ref<AnimeSerieWithEpisodeList>();
 
-    fetchAnimeEpisode(serieId, episodeId)
-        .then((data) => episodeData.value = data);
     fetchAnimeSerie(serieId)
         .then((data) => serieData.value = data);
+    if (episodeId) {
+        fetchAnimeEpisode(serieId, episodeId)
+            .then((data) => episodeData.value = data);
+    }
 
     return { episodeData, serieData };
 }

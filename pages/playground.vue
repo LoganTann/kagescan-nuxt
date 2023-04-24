@@ -1,6 +1,15 @@
 <template>
     <main class="">
         <CoreContainer>
+            <p>
+                <CoreButton> Bonjour </CoreButton>
+                <CoreButton> Bonjour 2 </CoreButton>
+                <CoreButton icon="bubble"> Toto </CoreButton>
+                <CoreButton> Bonjour 2 </CoreButton>
+                <CoreButton icon="bubble"> Toto </CoreButton>
+                <CoreButton icon="bubble"> Toto </CoreButton>
+            </p>
+
             <DevLorem count="30"></DevLorem>
         </CoreContainer>
 

@@ -10,6 +10,11 @@
                 <CoreButton icon="bubble"> Toto </CoreButton>
             </p>
 
+            <CoreSelect @change="log">
+                <CoreOption value="a">Option A</CoreOption>
+                <CoreOption value="b">Option B</CoreOption>
+                <CoreOption value="c">Option C</CoreOption>
+            </CoreSelect>
             <DevLorem count="30"></DevLorem>
         </CoreContainer>
 
@@ -19,4 +24,6 @@
         </Grid>
     </main>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+    const log = (e) => console.log(e);
+</script>

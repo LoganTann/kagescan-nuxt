@@ -10,6 +10,7 @@
             <ContentRenderer :value="episodeData"></ContentRenderer>
         </div>
     </div>
+    <div v-else>...</div>
 </template>
 <script setup lang="ts">
     import { AnimeEpisodeAndSerieData } from "~/composables/useAnime";

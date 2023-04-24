@@ -9,12 +9,14 @@
                 <CoreButton icon="bubble"> Toto </CoreButton>
                 <CoreButton icon="bubble"> Toto </CoreButton>
             </p>
+            <p class="pt-1"></p>
 
-            <CoreSelect @change="log">
-                <CoreOption value="a">Option A</CoreOption>
-                <CoreOption value="b">Option B</CoreOption>
-                <CoreOption value="c">Option C</CoreOption>
-            </CoreSelect>
+            <CoreCustSelect>
+                <CoreCustOption value="a" @click="log">Option A</CoreCustOption>
+                <CoreCustOption value="b">Option B</CoreCustOption>
+                <CoreCustOption value="c">Option C</CoreCustOption>
+            </CoreCustSelect>
+
             <DevLorem count="30"></DevLorem>
         </CoreContainer>
 
@@ -25,5 +27,5 @@
     </main>
 </template>
 <script setup lang="ts">
-    const log = (e) => console.log(e);
+    const log = (e) => console.log("called from option", e);
 </script>

@@ -11,18 +11,15 @@
         <div
             class="transition-all cursor-default flex flex-col absolute top-full left-0 w-full max-h-120 bg-slate-100 rounded-lg shadow-md py-2 border border-slate-300 mt[-1rem] opacity-0"
             :class="{ 'mt-1 opacity-100': isActive }"
-            ref="floatingEl"
         >
             <slot v-if="isActive"></slot>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-    import { VueElement } from "vue";
 
     const { waiting } = useDebounce(150);
     const isActive = ref(false);
-    const floatingEl = ref<VueElement | null>(null);
 
     async function handleOpenPicklist() {
         if (!isActive.value) {
@@ -31,12 +28,9 @@
         }
     }
     const handleClickGlobal = (ev: MouseEvent) => {
-        if (floatingEl.value && waiting.value === false) {
-            console.log("called from handleCLickGlobal");
-            const { top, left, right, bottom } = floatingEl.value.getBoundingClientRect();
-            if (ev.clientX < left || ev.clientX > right || ev.clientY < top || ev.clientY > bottom) {
-                isActive.value = false;
-            }
+        // waiting value prevents calling after handleOpenPicklist
+        if (isActive.value && waiting.value === false) {
+            isActive.value = false;
         }
     };
 

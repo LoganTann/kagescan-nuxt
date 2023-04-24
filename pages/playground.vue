@@ -12,9 +12,12 @@
             <p class="pt-1"></p>
 
             <CoreCustSelect>
-                <CoreCustOption value="a" @click="log">Option A</CoreCustOption>
-                <CoreCustOption value="b">Option B</CoreCustOption>
-                <CoreCustOption value="c">Option C</CoreCustOption>
+                <template #title>
+                    {{ selectedValue }}
+                </template>
+                <CoreCustOption value="a" @selected="setSelectedValue">Option A</CoreCustOption>
+                <CoreCustOption value="b" @selected="setSelectedValue">Option B</CoreCustOption>
+                <CoreCustOption value="c" @selected="setSelectedValue">Option C</CoreCustOption>
             </CoreCustSelect>
 
             <DevLorem count="30"></DevLorem>
@@ -28,4 +31,8 @@
 </template>
 <script setup lang="ts">
     const log = (e) => console.log("called from option", e);
+    const selectedValue = ref("Sélection");
+    function setSelectedValue(val: string) {
+        selectedValue.value = val;
+    }
 </script>

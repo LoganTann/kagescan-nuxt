@@ -1,10 +1,10 @@
 <template>
     <div v-if="episodeData && serieData">
-        <div>
-            {{ serieData.poster }}
-            {{ serieData.title }}
-            {{ serieData.subtitle }}
-        </div>
+        <AnimeTitleButton
+            :poster="serieData.poster"
+            :title="serieData.title"
+            :subtitle="serieData.subtitle"
+        ></AnimeTitleButton>
         <div>
             <h1 class="font-bold text-2xl text-center mb-2">{{ episodeData.title }}</h1>
             <ContentRenderer :value="episodeData" class="prose prose-sm mx-auto"></ContentRenderer>

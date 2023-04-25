@@ -23,7 +23,7 @@
                         class="flex items-center p-2 hover:bg-slate-200 rounded-md"
                     >
                         <div class="rounded w-8 h-8 p-2 bg-teal-600">
-                            <CoreIconBubble></CoreIconBubble>
+                            <CoreIconBubble class="fill-white"></CoreIconBubble>
                         </div>
                         <div class="pl-2">{{ link.name }}</div>
                     </NuxtLink>

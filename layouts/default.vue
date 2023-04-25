@@ -1,9 +1,11 @@
 <template>
-    <NuxtLoadingIndicator />
+    <NuxtLoadingIndicator :throttle="100" />
     <div id="app" class="font-sans">
         <CoreNavbarContainer :not-sticky="!isMainPage" />
-        <slot />
-        <footer>owo</footer>
+        <div class="grow">
+            <slot />
+        </div>
+        <footer>Kagescan</footer>
     </div>
 </template>
 <script setup lang="ts">

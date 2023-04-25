@@ -23,7 +23,7 @@
                         class="flex items-center p-2 hover:bg-slate-200 rounded-md"
                     >
                         <div class="rounded w-8 h-8 p-2 bg-teal-600">
-                            <CoreIconBubble></CoreIconBubble>
+                            <CoreIconBubble class="fill-white"></CoreIconBubble>
                         </div>
                         <div class="pl-2">{{ link.name }}</div>
                     </NuxtLink>
@@ -37,24 +37,24 @@
         {
             sectionName: "Découvrir",
             sectionData: [
-                { to: "/about/kagerou_project", name: "Kagerou Project" },
-                { to: "/about/kagescan", name: "Kagescan" },
-                { to: "/about/projects", name: "Projets transverses" },
+                { to: "#/about/kagerou_project", name: "Kagerou Project" },
+                { to: "#/about/kagescan", name: "Kagescan" },
+                { to: "#/about/projects", name: "Projets transverses" },
             ],
         },
         {
             sectionName: "Regarder",
             sectionData: [
                 { to: "/scan", name: "Le manga" },
-                { to: "/anime/mekakucity-actors/artificial-enemy", name: "L'animé" },
+                { to: "/anime", name: "L'animé" },
                 { to: "/novel", name: "Le roman" },
-                { to: "/music", name: "Les musiques" },
+                { to: "#/music", name: "Les musiques" },
             ],
         },
         {
             sectionName: "Explorer",
             sectionData: [
-                { to: "/discord", name: "Notre discord" },
+                { to: "#/discord", name: "Notre discord" },
                 { to: "https://twitter.com/KagerouDaysFr/", name: "Notre twitter" },
                 { to: "https://kagerouproject.fandom.com/wiki/fr", name: "Le wiki français" },
             ],

@@ -1,11 +1,11 @@
 <template>
-    <main>
-        <Grid row>
-            <Grid col="s12 l8">
+    <main class="pt-8 mx-auto md:w-11/12 max-w-7xl px-1 sm:px-3 md:px-5">
+        <Grid row class="gap-4">
+            <Grid col="s12 l7">
                 <AnimeMainContent :page-data="pageData"></AnimeMainContent>
             </Grid>
-            <Grid col="s12 l3">
-                <AnimeSideContent :page-data="pageData" />
+            <Grid col="s12 l5">
+                <AnimeSideContent :page-data="pageData" class="pl-4" />
             </Grid>
         </Grid>
     </main>

@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-white/75" :class="navClasses">
+    <nav class="bg-white/75 shadow-sm" :class="navClasses">
         <CoreContainer class="flex items-center h-20">
             <div class="flex items-center flex-1 justify-center md:justify-start">
                 <NuxtLink to="/">

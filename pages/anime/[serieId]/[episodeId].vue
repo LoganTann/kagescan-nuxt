@@ -4,7 +4,7 @@
             <Grid col="s12 l7">
                 <AnimeMainContent :page-data="pageData"></AnimeMainContent>
             </Grid>
-            <Grid col="s12 l4">
+            <Grid col="s12 l5">
                 <AnimeSideContent :page-data="pageData" class="pl-4" />
             </Grid>
         </Grid>

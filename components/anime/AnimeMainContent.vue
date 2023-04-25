@@ -1,6 +1,10 @@
 <template>
     <div>
-        <AnimePlayerContainer v-if="currentPlayer" :to-play="currentPlayer"></AnimePlayerContainer>
+        <AnimePlayerContainer
+            v-if="currentPlayer"
+            :to-play="currentPlayer"
+            :episode-data="pageData.episodeData.value !"
+        ></AnimePlayerContainer>
         {{ surroundings }}
     </div>
 </template>

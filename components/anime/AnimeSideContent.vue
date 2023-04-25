@@ -7,7 +7,7 @@
         </div>
         <div>
             <h1 class="font-bold text-2xl text-center mb-2">{{ episodeData.title }}</h1>
-            <ContentRenderer :value="episodeData" class="prose prose-sm"></ContentRenderer>
+            <ContentRenderer :value="episodeData" class="prose prose-sm mx-auto"></ContentRenderer>
         </div>
     </div>
     <div v-else>...</div>

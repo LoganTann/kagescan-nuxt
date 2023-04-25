@@ -46,7 +46,7 @@
             sectionName: "Regarder",
             sectionData: [
                 { to: "/scan", name: "Le manga" },
-                { to: "/anime/mekakucity-actors/artificial-enemy", name: "L'animé" },
+                { to: "/anime/mekakucity-actors/jinzou-enemy", name: "L'animé" },
                 { to: "/novel", name: "Le roman" },
                 { to: "/music", name: "Les musiques" },
             ],

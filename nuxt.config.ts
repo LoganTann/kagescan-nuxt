@@ -18,9 +18,17 @@ export default defineNuxtConfig({
     modules: [
         '@nuxtjs/tailwindcss',
         '@vueuse/nuxt',
+        '@nuxt/image-edge',
+        'nuxt-content-assets',
         '@nuxt/content'
     ],
     css: [
         "@/assets/commons.scss"
-    ]
+    ],
+    image: {
+        dir: '.nuxt/content-assets/public'
+    },
+    contentAssets: {
+        debug: true
+    }
 })

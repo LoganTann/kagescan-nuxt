@@ -37,9 +37,9 @@
         {
             sectionName: "Découvrir",
             sectionData: [
-                { to: "/about/kagerou_project", name: "Kagerou Project" },
-                { to: "/about/kagescan", name: "Kagescan" },
-                { to: "/about/projects", name: "Projets transverses" },
+                { to: "#/about/kagerou_project", name: "Kagerou Project" },
+                { to: "#/about/kagescan", name: "Kagescan" },
+                { to: "#/about/projects", name: "Projets transverses" },
             ],
         },
         {
@@ -48,13 +48,13 @@
                 { to: "/scan", name: "Le manga" },
                 { to: "/anime/mekakucity-actors/01_jinzou-enemy", name: "L'animé" },
                 { to: "/novel", name: "Le roman" },
-                { to: "/music", name: "Les musiques" },
+                { to: "#/music", name: "Les musiques" },
             ],
         },
         {
             sectionName: "Explorer",
             sectionData: [
-                { to: "/discord", name: "Notre discord" },
+                { to: "#/discord", name: "Notre discord" },
                 { to: "https://twitter.com/KagerouDaysFr/", name: "Notre twitter" },
                 { to: "https://kagerouproject.fandom.com/wiki/fr", name: "Le wiki français" },
             ],

@@ -12,7 +12,11 @@
             <p>{{ props.subtitle }}</p>
         </div>
         <div>
-            <CoreIconContainer icon="chevronDown" class="fill-slate-800"></CoreIconContainer>
+            <CoreIconContainer
+                icon="chevronDown"
+                class="fill-slate-800 transition-transform duration-300"
+                :class="{ 'rotate-180': props.isActive }"
+            ></CoreIconContainer>
         </div>
     </div>
 </template>

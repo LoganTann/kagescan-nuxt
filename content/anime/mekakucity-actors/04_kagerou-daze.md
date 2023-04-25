@@ -8,4 +8,6 @@ players:
       url: "videos/dev.mp4"
 ---
 
-Hibiya est interloqué par sa rencontre avec Momo, qu'il finit par reconnaître après un de ses passages à la télé. Il passe ses vacances d'été aux côtés de Hiyori, une amie pour laquelle il a le béguin, mais qui ne lui rend pas vraiment la pareille. Hibiya cherche à parler avec elle de ses rêves étranges où il tente désespérément de la sauver.
+Hibiya est interloqué par sa rencontre avec Moemo, qu'il finit par reconnaître après un de ses passages à la télé. Il passe ses vacances d'été aux côtés de Hiyori, une amie pour laquelle il a le béguin, mais qui ne lui rend pas vraiment la pareille.
+
+Hibiya cherche à parler avec elle de ses rêves étranges où il tente désespérément de la sauver.

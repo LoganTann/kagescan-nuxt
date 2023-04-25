@@ -7,3 +7,5 @@ players:
     - player: "video"
       url: "videos/dev.mp4"
 ---
+
+Azami, le monstre de la légende, attend en compagnie de sa fille Shion le retour de Tsukihiko, son mari. Mais les villageois des alentours ne semblent pas prêts à accepter leur existence. 

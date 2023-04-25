@@ -1,5 +1,5 @@
 <template>
-    <NuxtLoadingIndicator />
+    <NuxtLoadingIndicator :throttle="100" />
     <div id="app" class="font-sans">
         <CoreNavbarContainer :not-sticky="!isMainPage" />
         <slot />

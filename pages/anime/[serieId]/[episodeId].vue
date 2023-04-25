@@ -1,5 +1,5 @@
 <template>
-    <CoreContainer>
+    <main class="pt-4 mx-auto md:w-11/12 max-w-7xl px-1 sm:px-3 md:px-5">
         <Grid row class="gap-4">
             <Grid col="s12 l7">
                 <AnimeMainContent :page-data="pageData"></AnimeMainContent>
@@ -8,7 +8,7 @@
                 <AnimeSideContent :page-data="pageData" class="pl-4" />
             </Grid>
         </Grid>
-    </CoreContainer>
+    </main>
 </template>
 <script setup lang="ts">
     const route = useRoute();

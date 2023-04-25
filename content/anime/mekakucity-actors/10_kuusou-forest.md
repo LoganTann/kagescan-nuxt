@@ -7,5 +7,3 @@ players:
     - player: "video"
       url: "videos/dev.mp4"
 ---
-
-![thumbs/mca10.webp](thumbs/mca10.webp)

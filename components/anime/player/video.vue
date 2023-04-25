@@ -1,5 +1,5 @@
 <template>
-    <video controls :poster="props.poster">
+    <video controls :poster="props.poster" class="aspect-video w-full bg-slate-100 rounded-sm">
         <source :src="url" />
     </video>
 </template>

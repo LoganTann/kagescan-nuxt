@@ -7,3 +7,5 @@ players:
     - player: "video"
       url: "videos/dev.mp4"
 ---
+
+test

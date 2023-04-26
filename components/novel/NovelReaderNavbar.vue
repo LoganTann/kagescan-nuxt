@@ -1,5 +1,5 @@
 <template>
-    <div class="sticky top-0 bg-white z-30  ">
+    <div class="sticky top-0 bg-white z-30">
         <CoreContainer class="flex">
             <NuxtLink to="../" class="hover:bg-slate-100 hidden sm:inline-flex items-center px-2 transition-colors">
                 <span>{{ props.currentVolumeData?.serieName }}</span>
@@ -56,6 +56,9 @@
                                         ></nuxt-img>
                                         <p class="text-xs">{{ props.currentVolumeData.previousVolume.title }}</p>
                                     </NuxtLink>
+                                    <NuxtLink v-else to="../" class="h-full flex items-center">
+                                        Accueil : {{ props.currentVolumeData?.serieName }}
+                                    </NuxtLink>
                                 </div>
                                 <div class="hover:bg-slate-100 p-2 transition-colors">
                                     <NuxtLink
@@ -75,6 +78,9 @@
                                             class="my-2 mx-auto"
                                         ></nuxt-img>
                                         <p class="text-xs">{{ props.currentVolumeData.nextVolume.title }}</p>
+                                    </NuxtLink>
+                                    <NuxtLink v-else to="../" class="h-full flex items-center">
+                                        Accueil : {{ props.currentVolumeData?.serieName }}
                                     </NuxtLink>
                                 </div>
                             </div>

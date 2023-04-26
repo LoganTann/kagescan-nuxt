@@ -7,9 +7,6 @@
                 <ContentRenderer :value="doc" />
             </ContentDoc>
         </div>
-        <pre>
-            {{ data }} {{ error }}
-        </pre>
     </div>
 </template>
 

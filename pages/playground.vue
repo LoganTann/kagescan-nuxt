@@ -11,15 +11,6 @@
             </p>
             <p class="pt-1"></p>
 
-            <CoreCustSelect>
-                <template #title>
-                    {{ selectedValue }}
-                </template>
-                <CoreCustOption value="a" @selected="setSelectedValue">Option A</CoreCustOption>
-                <CoreCustOption value="b" @selected="setSelectedValue">Option B</CoreCustOption>
-                <CoreCustOption value="c" @selected="setSelectedValue">Option C</CoreCustOption>
-            </CoreCustSelect>
-
             <DevLorem count="30"></DevLorem>
         </CoreContainer>
 

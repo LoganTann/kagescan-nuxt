@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="px-4 mt-2">
         <NovelReaderNavbar :current-volume-data="data"></NovelReaderNavbar>
-        <div class="prose mx-auto">
+        <div class="prose mx-auto mt-8">
             <ContentDoc v-slot="{ doc }">
                 <h1 class="text-center">{{ doc.title }}</h1>
                 <ContentRenderer :value="doc" />

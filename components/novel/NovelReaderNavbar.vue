@@ -92,7 +92,6 @@
     </div>
 </template>
 <script setup lang="ts">
-    import { CoreIconChevronDown } from "~/.nuxt/components";
     import { type NovelVolumeApiResponse } from "~/server/api/novel/getVolumeData.get";
 
     const route = useRoute();
@@ -108,4 +107,10 @@
         return props.currentVolumeData.chapters;
     });
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+    div.fixed::before {
+        height: 64px;
+        content: "";
+        display: block;
+    }
+</style>

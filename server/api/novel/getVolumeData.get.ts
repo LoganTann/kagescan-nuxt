@@ -73,6 +73,19 @@ export default defineEventHandler(async (event) => {
         }
     }
 
+    if (response.serieName === '') {
+        throw createError({
+            statusCode: 404,
+            statusMessage: `Serie [${serieId}] does not exists`,
+        });
+    }
+    if (response.currentVolume.id === '') {
+        throw createError({
+            statusCode: 404,
+            statusMessage: `Volume [${volumeId}] from the serie [${serieId}] does not exists`,
+        });
+    }
+
     return response;
 })
 

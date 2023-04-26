@@ -5,7 +5,7 @@
                 <CoreButton> Bonjour </CoreButton>
                 <CoreButton> Bonjour 2 </CoreButton>
                 <CoreButton icon="bubble"> Toto </CoreButton>
-                <CoreButton> Bonjour 2 </CoreButton>
+                <CoreButton variant="large"> Bonjour 2 </CoreButton>
                 <CoreButton icon="bubble"> Toto </CoreButton>
                 <CoreButton icon="bubble"> Toto </CoreButton>
             </p>

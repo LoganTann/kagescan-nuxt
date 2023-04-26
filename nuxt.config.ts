@@ -29,6 +29,6 @@ export default defineNuxtConfig({
         dir: '.nuxt/content-assets/public'
     },
     contentAssets: {
-        debug: true
+        debug: false
     }
 })

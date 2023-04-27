@@ -5,20 +5,11 @@
                 <CoreButton> Bonjour </CoreButton>
                 <CoreButton> Bonjour 2 </CoreButton>
                 <CoreButton icon="bubble"> Toto </CoreButton>
-                <CoreButton> Bonjour 2 </CoreButton>
+                <CoreButton variant="large"> Bonjour 2 </CoreButton>
                 <CoreButton icon="bubble"> Toto </CoreButton>
                 <CoreButton icon="bubble"> Toto </CoreButton>
             </p>
             <p class="pt-1"></p>
-
-            <CoreCustSelect>
-                <template #title>
-                    {{ selectedValue }}
-                </template>
-                <CoreCustOption value="a" @selected="setSelectedValue">Option A</CoreCustOption>
-                <CoreCustOption value="b" @selected="setSelectedValue">Option B</CoreCustOption>
-                <CoreCustOption value="c" @selected="setSelectedValue">Option C</CoreCustOption>
-            </CoreCustSelect>
 
             <DevLorem count="30"></DevLorem>
         </CoreContainer>

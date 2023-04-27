@@ -3,7 +3,8 @@
     <CoreIconChevronDown v-else-if="props.icon === icons.chevronDown"></CoreIconChevronDown>
 </template>
 <script setup lang="ts">
-    import { CoreIcons, icons } from "./CoreIcons";
+    import { icons } from "./-CoreIcons";
+    import type { CoreIcons } from "./-CoreIcons";
 
     const props = defineProps<{
         icon: CoreIcons;

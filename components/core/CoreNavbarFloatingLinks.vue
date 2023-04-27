@@ -14,7 +14,7 @@
                     <g transform="rotate(90 12 12)"><path d="M9 5l7 7-7 7"></path></g>
                 </svg>
             </div>
-            <div class="pt-2 absolute top-full left-1/2 -translate-x-1/2">
+            <div class="pt-2 absolute top-full left-1/2 -translate-x-1/2 z-40">
                 <div class="hidden group-hover:grid rounded-lg shadow bg-slate-100 w-max grid-cols-1 p-2">
                     <NuxtLink
                         v-for="link in section.sectionData"

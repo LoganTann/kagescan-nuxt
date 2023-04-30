@@ -23,8 +23,3 @@
         },
     });
 </script>
-<style>
-    [aria-describedby="footnote-label"] {
-        scroll-margin-top: 4rem;
-    }
-</style>

@@ -1,42 +1,15 @@
-# Nuxt 3 Minimal Starter
+# Kagescan-Nuxt (beta)
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Rewrite of kagescan.fr, using Nuxt.js v3
 
-## Setup
+## Disclaimer : this project is not open source (yet)
 
-Make sure to install the dependencies:
+Although the source code is publicly readable, this does not mean that it is in the public domain. You are not allowed to deploy it on your own server, nor to modify and redistribute it.
 
-```bash
-# yarn
-yarn install
+An open-source release (Apache 2.0) is envisaged depending on : 1. The progress of the project (maybe once we're past the beta stage) ; 2. The interest of users to reuse this code. So if you see a potential for personal / professional use in this project, don't hesitate to let me know !
 
-# npm
-npm install
+## Installation
 
-# pnpm
-pnpm install
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+1. Installing dependencies : `npm install`
+2. Running the development server : `npm run dev` and go to [localhost:3000](http://localhost:3000)
+3. Building the project : `npm run build` (`npm run preview` to preview the production build locally)

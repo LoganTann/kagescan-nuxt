@@ -12,9 +12,11 @@ export default defineNuxtConfig({
             ],
         }
     },
+
     typescript: {
         shim: false
     },
+
     modules: [
         '@nuxtjs/tailwindcss',
         '@vueuse/nuxt',
@@ -22,13 +24,20 @@ export default defineNuxtConfig({
         'nuxt-content-assets',
         '@nuxt/content'
     ],
+
     css: [
         "@/assets/commons.scss"
     ],
+
     image: {
         dir: '.nuxt/content-assets/public'
     },
+
     contentAssets: {
         debug: false
+    },
+
+    devtools: {
+        enabled: false
     }
 })

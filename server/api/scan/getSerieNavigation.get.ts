@@ -1,5 +1,5 @@
-import * as repo from "./getSerieNavigation_repo";
-import * as service from "./getSerieNavigation_svc";
+import * as repo from "./-getSerieNavigationRepo";
+import * as service from "./-getSerieNavigationSvc";
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event)

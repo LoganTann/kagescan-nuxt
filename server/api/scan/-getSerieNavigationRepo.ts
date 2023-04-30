@@ -1,10 +1,14 @@
 
-import { H3Event } from "h3";
 import { serverQueryContent } from "#content/server";
+import { H3Event, MANGA_FOLDER, MangaMetadata } from "../-types";
 
-const MANGA_FOLDER = '/scan'
-
-export async function getSortedFoldersOfManga(event: H3Event, serieId: string) {
+/**
+ * Returns manga serie, volume and chapter files childrens to the provided serieId.
+ * Sorting order is defined at {@link sortMangaChapters}
+ * @param event H3 Server context
+ * @param serieId The serie to fetch files from.
+ */
+export async function getSortedFoldersOfManga(event: H3Event, serieId: string): Promise<MangaMetadata[]> {
     const folder = new RegExp(`^${MANGA_FOLDER}/${serieId}`);
     const queryResult = await serverQueryContent(event)
         .without("body")
@@ -14,13 +18,9 @@ export async function getSortedFoldersOfManga(event: H3Event, serieId: string) {
                 _path: { $regex: folder }
             }
         )
-        .find()
+        .find() as MangaMetadata[];
 
-    const sorted = queryResult.sort((a, b) => {
-        const fileA = a._path!.split("/").at(-1)!;
-        const fileB = b._path!.split("/").at(-1)!;
-        return sortChapterAgain(fileA, fileB);
-    });
+    const sorted = queryResult.sort(sortMangaChapters);
     return sorted;
 }
 
@@ -34,7 +34,10 @@ export async function getSortedFoldersOfManga(event: H3Event, serieId: string) {
  * @param a first chapter id
  * @param b second chapter id
  */
-function sortChapterAgain(a: string, b: string): number {
+function sortMangaChapters(fileA: MangaMetadata, fileB: MangaMetadata): number {
+    const a = fileA._path!.split("/").at(-1)!;
+    const b = fileB._path!.split("/").at(-1)!;
+
     const digitFollowedByDotOrUnderscore = /^(\d+)(.|_)?/;
     const defaultResponse = a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" });
 

@@ -5,10 +5,18 @@
         <div class="grow">
             <slot />
         </div>
-        <footer>Kagescan</footer>
+        <footer v-if="isHeaderVisible">Kagescan</footer>
     </div>
 </template>
 <script setup lang="ts">
+    import { MANGA_FOLDER } from "~/server/api/-types";
+
     const route = useRoute();
     const isMainPage = computed(() => route.path == "/");
+    const isHeaderVisible = computed(() => {
+        if (route.path.startsWith(MANGA_FOLDER)) {
+            return false;
+        }
+        return true;
+    });
 </script>

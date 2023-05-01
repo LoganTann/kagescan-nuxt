@@ -12,6 +12,11 @@ export const NOVEL_FOLDER = '/novel';
  */
 export const MANGA_FOLDER = '/scan'
 
+/**
+ * Parameters above 35 will be marked as invalid
+ */
+export const MAX_PARAM_LENGTH = 35;
+
 interface ParsedContentMetaMd extends ParsedContentMeta {
     _id: string,
     _path: string,

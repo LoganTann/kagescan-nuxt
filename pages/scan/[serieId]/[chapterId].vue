@@ -4,15 +4,13 @@
     </div>
     <div v-else>
         <ContentDoc>
-            <template #empty>
-                {{ visiblePages }}
-            </template>
+            <template #empty> </template>
         </ContentDoc>
-        <div class="mangaReader">
+        <div id="mangaReader">
             <div class="bg-white flex">
                 <div>Header</div>
             </div>
-            <div class="flex justify-center items-center">
+            <div class="flex justify-center items-center flex-col">
                 <template v-for="mangaPage in visiblePages" :key="mangaPage.id">
                     <NuxtImg
                         v-if="mangaPage.isVisible || mangaPage.isPreloading"
@@ -79,7 +77,7 @@
     }
 </script>
 <style scoped lang="scss">
-    .mangaReader {
+    #mangaReader {
         width: 100%;
         height: 100vh;
         display: grid;

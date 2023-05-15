@@ -4,7 +4,7 @@
         v-click-outside
         @click="handleOpenPicklist"
     >
-        <div class="">
+        <div>
             <slot name="title">Select</slot>
         </div>
         <div

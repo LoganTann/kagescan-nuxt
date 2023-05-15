@@ -1,80 +1,83 @@
 <template>
-    <div v-if="error">
-        {{ error.message }}
+    <div v-if="pagesError">
+        {{ pagesError.message }}
     </div>
     <div v-else>
-        <ContentDoc>
-            <template #empty> </template>
-        </ContentDoc>
+        <CoreContainer>
+            <NuxtLink :to="`${MANGA_FOLDER}/${route.params.serieId}`">
+                <h3 class="mt-4 text-teal-700 font-medium text-lg">{{ serieData?.serieName }}</h3>
+            </NuxtLink>
+            <h1 class="font-medium text-2xl">{{ chapterData.title }}</h1>
+            <p class="my-4 mb-8 mx-6 sm:container text-slate-700 prose">{{ chapterData.description }}</p>
+        </CoreContainer>
         <div id="mangaReader">
-            <div class="bg-white flex">
-                <div>Header</div>
-            </div>
-            <div class="flex justify-center items-center flex-col">
-                <template v-for="mangaPage in visiblePages" :key="mangaPage.id">
-                    <NuxtImg
-                        v-if="mangaPage.isVisible || mangaPage.isPreloading"
-                        :src="mangaPage.src"
-                        :class="{ hidden: mangaPage.isPreloading }"
-                        :id="mangaPage.id"
-                        class="mangaPage max-h-[calc(100vh-5rem)]"
-                        @click="nextPage"
-                    ></NuxtImg>
-                </template>
-            </div>
+            <ScanHeader>
+                <NuxtLink
+                    :to="paginationCounter.previousChapterUrl.value"
+                    class="hover:bg-slate-100 transition-colors px-2"
+                    title="Chapitre précédent"
+                    >Prect</NuxtLink
+                >
+                <ScanHeaderNavigation
+                    :serieNavigation="serieData"
+                    @update_surrounding_urls="paginationCounter.updateSurroundingUrls"
+                    titleTxt="Choix du chapitre"
+                ></ScanHeaderNavigation>
+                <NuxtLink
+                    :to="paginationCounter.nextChapterUrl.value"
+                    class="hover:bg-slate-100 transition-colors px-2"
+                    title="Chapitre suivant"
+                    >Suivr</NuxtLink
+                >
+                <div>Page {{ paginationCounter.currentPageIndex }} dd</div>
+                <button class="hover:bg-slate-100 transition-colors px-2">Tmbs</button>
+                <button class="hover:bg-slate-100 transition-colors px-2">Settgs</button>
+            </ScanHeader>
+            <ScanReader
+                :images="pagesData?.images"
+                :current-page-index="paginationCounter.currentPageIndex"
+                @next-page="paginationCounter.nextPage"
+                @previous-page="paginationCounter.previousPage"
+            ></ScanReader>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-    import { onKeyStroke } from "@vueuse/core";
+    import { MANGA_FOLDER } from "~/server/api/-types";
 
     const route = useRoute();
-    const { data, error } = await useFetch("/api/scan/getChapterPages", {
+
+    const chapterData = await queryContent(route.path).findOne();
+
+    useContentHead({
+        ...chapterData,
+        image: chapterData.cover,
+    });
+
+    const { data: pagesData, error: pagesError } = await useFetch("/api/scan/getChapterPages", {
         params: {
             serieId: route.params.serieId,
             chapterId: route.params.chapterId,
         },
     });
-
-    const params = useUrlSearchParams("history");
-    if (!params.page) {
-        if (process.server && route.params.page) {
-            params.page = route.params.page;
-        } else {
-            params.page = "1";
-        }
-    }
-
-    const visiblePages = computed(() => {
-        if (!data.value?.images.length) {
-            return [];
-        }
-        return data.value.images.map((page, i) => {
-            const pageDistance = i + 1 - Number(params.page);
-            return {
-                ...page,
-                isVisible: pageDistance == 0,
-                isPreloading: pageDistance > 0 && pageDistance < 5,
-            };
-        });
+    const { data: serieData, error: serieError } = await useFetch("/api/scan/getSerieNavigation", {
+        params: {
+            serieId: route.params.serieId,
+        },
     });
 
-    onKeyStroke("ArrowRight", (e) => {
-        e.preventDefault();
-        nextPage();
-    });
-    onKeyStroke("ArrowLeft", (e) => {
-        e.preventDefault();
-        previousPage();
-    });
-    function previousPage() {
-        const page = Number(params.page ?? 0);
-        params.page = String(page - 1);
-    }
-    function nextPage() {
-        const page = Number(params.page ?? 0);
-        params.page = String(page + 1);
-    }
+    const paginationCounter = usePageCounter();
+
+    watch(
+        () => pagesData,
+        (data) => {
+            const pagesCount = data.value?.images.length;
+            if (pagesCount) {
+                paginationCounter.pagesCount.value = pagesCount;
+            }
+        },
+        { immediate: true }
+    );
 </script>
 <style scoped lang="scss">
     #mangaReader {
@@ -84,7 +87,5 @@
         grid-auto-columns: 1fr;
         grid-template-rows: 4rem 1fr;
         gap: 0px 0px;
-    }
-    .mangaPage {
     }
 </style>

@@ -4,8 +4,6 @@ import { MANGA_FOLDER, MAX_PARAM_LENGTH } from "../-types";
 import * as fs from 'node:fs/promises';
 import { MangaPage } from "./-getChapterPagesTypes";
 
-
-
 export default defineEventHandler(async (event) => {
     const query = getQuery(event)
     const serieId = getStringIdParam(query, "serieId");

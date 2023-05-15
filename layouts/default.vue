@@ -5,7 +5,7 @@
         <div class="grow">
             <slot />
         </div>
-        <footer v-if="isHeaderVisible">Kagescan</footer>
+        <footer v-if="isFooterVisible">Kagescan</footer>
     </div>
 </template>
 <script setup lang="ts">
@@ -13,8 +13,8 @@
 
     const route = useRoute();
     const isMainPage = computed(() => route.path == "/");
-    const isHeaderVisible = computed(() => {
-        if (route.path.startsWith(MANGA_FOLDER)) {
+    const isFooterVisible = computed(() => {
+        if (route.path.startsWith(MANGA_FOLDER) && typeof route.params.chapterId === "string") {
             return false;
         }
         return true;

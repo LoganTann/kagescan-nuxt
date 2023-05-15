@@ -2,6 +2,9 @@
 import type { QueryObject } from "ufo";
 import { MANGA_FOLDER, MAX_PARAM_LENGTH } from "../-types";
 import * as fs from 'node:fs/promises';
+import { MangaPage } from "./-getChapterPagesTypes";
+
+
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event)
@@ -23,7 +26,7 @@ export default defineEventHandler(async (event) => {
 
     const imageFileExtensionRegex = /\.(png|webp|jpg|svg|jpeg|gif)$/;
     const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
-    const images = contents
+    const images: MangaPage[] = contents
         .filter((name) => name.match(imageFileExtensionRegex))
         .sort(collator.compare)
         .map((name, i) => {

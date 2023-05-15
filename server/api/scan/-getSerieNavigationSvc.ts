@@ -48,3 +48,47 @@ export async function buildSerieNavigation(allChapters: MangaMetadata[]): Promis
     }
     return result;
 }
+
+
+/**
+ * Structures the provided files for a use in the manga section
+ * @param allChapters Array of files metadata to process
+ 
+export async function buildSerieNavigationFlat(allChapters: MangaMetadata[]) {
+    const result = {
+        serieName: "",
+        options: []
+    }
+    let hasAtLeastOneVolume = false;
+    for (const chapter of allChapters) {
+        if (chapter.kgs_layout == "manga_serie") {
+            result.serieName = chapter.title;
+            continue;
+        }
+        if (chapter.kgs_layout == "manga_volume") {
+            hasAtLeastOneVolume = true;
+            result.options.push({
+                kind: "volume",
+                key: chapter.volumeId,
+                name: chapter.title,
+                cover: chapter.cover,
+            });
+            continue;
+        }
+        if (chapter.kgs_layout == "manga_chapter") {
+            const lastVolumeChapters = result.volumes.at(-1)!.chapters;
+            lastVolumeChapters.push({
+                name: chapter.title,
+                id: chapter._id,
+                path: chapter._path,
+                cover: chapter.cover ?? ""
+            });
+        }
+    }
+    // removes the default section if empty
+    if (result.volumes.length > 1 && result.volumes[0].chapters.length == 0) {
+        result.volumes = result.volumes.slice(1);
+    }
+    return result;
+}
+*/

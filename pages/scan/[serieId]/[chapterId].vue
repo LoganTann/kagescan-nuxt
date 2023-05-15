@@ -7,21 +7,17 @@
             <template #empty> </template>
         </ContentDoc>
         <div id="mangaReader">
-            <div class="bg-white flex">
-                <div>Header</div>
-            </div>
-            <div class="flex justify-center items-center flex-col">
-                <template v-for="mangaPage in visiblePages" :key="mangaPage.id">
-                    <NuxtImg
-                        v-if="mangaPage.isVisible || mangaPage.isPreloading"
-                        :src="mangaPage.src"
-                        :class="{ hidden: mangaPage.isPreloading }"
-                        :id="mangaPage.id"
-                        class="mangaPage max-h-[calc(100vh-5rem)]"
-                        @click="nextPage"
-                    ></NuxtImg>
-                </template>
-            </div>
+            <ScanHeader
+                :images="pagesData?.images"
+                :current-page="params.page as string"
+            >
+                <ScanHeaderNavigation :serieNavigation="serieNavigationData"></ScanHeaderNavigation>
+            </ScanHeader>
+            <ScanReader
+                :images="pagesData?.images"
+                :current-page="params.page as string"
+                @next-page="nextPage"
+            ></ScanReader>
         </div>
     </div>
 </template>
@@ -29,10 +25,16 @@
     import { onKeyStroke } from "@vueuse/core";
 
     const route = useRoute();
-    const { data, error } = await useFetch("/api/scan/getChapterPages", {
+    const { data: pagesData, error: pagesError } = await useFetch("/api/scan/getChapterPages", {
         params: {
             serieId: route.params.serieId,
             chapterId: route.params.chapterId,
+        },
+    });
+
+    const { data: serieNavigationData, error: serieNavigationError } = await useFetch("/api/scan/getSerieNavigation", {
+        params: {
+            serieId: route.params.serieId,
         },
     });
 
@@ -44,20 +46,6 @@
             params.page = "1";
         }
     }
-
-    const visiblePages = computed(() => {
-        if (!data.value?.images.length) {
-            return [];
-        }
-        return data.value.images.map((page, i) => {
-            const pageDistance = i + 1 - Number(params.page);
-            return {
-                ...page,
-                isVisible: pageDistance == 0,
-                isPreloading: pageDistance > 0 && pageDistance < 5,
-            };
-        });
-    });
 
     onKeyStroke("ArrowRight", (e) => {
         e.preventDefault();
@@ -75,6 +63,9 @@
         const page = Number(params.page ?? 0);
         params.page = String(page + 1);
     }
+    function setPage(value) {
+        params.page = String(value);
+    }
 </script>
 <style scoped lang="scss">
     #mangaReader {
@@ -84,7 +75,5 @@
         grid-auto-columns: 1fr;
         grid-template-rows: 4rem 1fr;
         gap: 0px 0px;
-    }
-    .mangaPage {
     }
 </style>

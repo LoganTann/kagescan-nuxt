@@ -1,4 +1,5 @@
+<template></template>
 <script setup lang="ts">
     // not implemented
-    navigateTo("/anime/mekakucity-actors/11_otsukimi-recital");
+    navigateTo("/anime/mekakucity-actors/otsukimi-recital");
 </script>

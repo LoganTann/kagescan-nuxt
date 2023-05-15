@@ -6,3 +6,8 @@ body,
     display: flex;
     flex-direction: column;
 }
+
+
+[aria-describedby="footnote-label"] {
+    scroll-margin-top: 4rem;
+}

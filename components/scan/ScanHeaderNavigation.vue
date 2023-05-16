@@ -1,8 +1,8 @@
 <template>
     <div class="inline-flex">
         <NuxtLink
-            :to="props.previousChapterUrl"
-            class="hover:bg-slate-100 transition-colors px-2 inline-flex items-center"
+            :to="prevLocalChapterUrl"
+            class="hover:bg-slate-100 transition-colors px-2 hidden sm:inline-flex items-center"
             title="Chapitre précédent"
         >
             <font-awesome-icon icon="fa-solid fa-arrow-left" class="w-5 h-5 text-slate-800" />
@@ -11,7 +11,7 @@
             <template #title>
                 <div
                     :title="props.titleTxt"
-                    class="flex items-center px-2 py-2 hover:bg-slate-100 transition-colors min-w-[20rem] h-full"
+                    class="hidden sm:flex items-center px-2 py-2 hover:bg-slate-100 transition-colors min-w-[20rem] h-full"
                 >
                     <nuxt-img :src="processedChapterData.coverSrc" :width="30"></nuxt-img>
                     <div class="grow px-2">
@@ -20,9 +20,13 @@
                     </div>
                     <CoreIconContainer icon="chevronDown" class="inline"></CoreIconContainer>
                 </div>
+                <div class="sm:hidden flex items-center h-full">
+                    {{ processedChapterData.chapterShortName }}
+                    <font-awesome-icon icon="fa-solid fa-chevron-down" class="w-3 h-3 ml-2" />
+                </div>
             </template>
             <template #default>
-                <div class="bg-white flex flex-col shadow border">
+                <div class="bg-white flex flex-col shadow border min-w-[20rem]">
                     <div class="px-4 py-2 text-center text-sm text-slate-700">Listes des chapitres</div>
                     <div class="flex flex-col font-medium text-sm overflow-y-scroll max-h-52">
                         <template v-for="chapter in processedChapterData.chapters" :key="chapter.key">
@@ -43,8 +47,8 @@
             </template>
         </CoreDropdownContainer>
         <NuxtLink
-            :to="props.nextChapterUrl"
-            class="hover:bg-slate-100 transition-colors px-2 inline-flex items-center"
+            :to="nextLocalChapterUrl"
+            class="hover:bg-slate-100 transition-colors px-2 hidden sm:inline-flex items-center"
             title="Chapitre suivant"
         >
             <font-awesome-icon icon="fa-solid fa-arrow-right" class="w-5 h-5 text-slate-800" />
@@ -61,10 +65,11 @@
     const props = defineProps<{
         serieNavigation: MangaVolumeApiResponse | null;
         titleTxt?: string;
-        nextChapterUrl: string;
-        previousChapterUrl: string;
     }>();
     const route = useRoute();
+
+    const nextLocalChapterUrl = ref("");
+    const prevLocalChapterUrl = ref("");
 
     /**
      * Take the serie navigation from the backend, and perform linear operations on the chapter list
@@ -73,6 +78,7 @@
     const processedChapterData = computed(() => {
         const result = {
             volumeName: "",
+            chapterShortName: `Chapitre ${route.params.chapterId}`,
             chapterName: "",
             coverSrc: "",
             chapters: [] as (Option | OptionGroup)[],
@@ -112,7 +118,10 @@
         () => processedChapterData.value.chapters,
         (chapters) => {
             const chaptersOnly: Option[] = chapters.filter((chapter): chapter is Option => chapter.kind === "nuxtLink");
-            emits("update_surrounding_urls", getSurroundings(chaptersOnly));
+            const urls = getSurroundings(chaptersOnly);
+            emits("update_surrounding_urls", urls);
+            nextLocalChapterUrl.value = urls.nextChapterUrl;
+            prevLocalChapterUrl.value = urls.previousChapterUrl;
         },
         { immediate: true }
     );

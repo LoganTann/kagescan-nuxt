@@ -3,19 +3,17 @@
         {{ pagesError.message }}
     </div>
     <div v-else>
-        <CoreContainer>
+        <CoreContainer class="px-3">
+            <h1 class="mt-4 font-medium text-2xl">{{ chapterData.title }}</h1>
             <NuxtLink :to="`${MANGA_FOLDER}/${route.params.serieId}`">
-                <h3 class="mt-4 text-teal-700 font-medium text-lg">{{ serieData?.serieName }}</h3>
+                <h3 class="text-teal-700 font-medium text-lg hover:underline">{{ serieData?.serieName }}</h3>
             </NuxtLink>
-            <h1 class="font-medium text-2xl">{{ chapterData.title }}</h1>
             <p class="my-4 mb-8 mx-6 sm:container text-slate-700 prose">{{ chapterData.description }}</p>
         </CoreContainer>
         <div id="mangaReader">
             <ScanHeader>
                 <ScanHeaderNavigation
                     :serieNavigation="serieData"
-                    :previous-chapter-url="paginationCounter.previousChapterUrl.value"
-                    :next-chapter-url="paginationCounter.nextChapterUrl.value"
                     @update_surrounding_urls="paginationCounter.updateSurroundingUrls"
                     titleTxt="Choix du chapitre"
                 ></ScanHeaderNavigation>
@@ -25,13 +23,6 @@
                     :totalPages="paginationCounter.pagesCount.value"
                     @set-page="paginationCounter.setPage"
                 ></ScanHeaderPageSelector>
-                <div class="border-l border-slate-200 mx-2 my-2"></div>
-                <button class="hover:bg-slate-100 transition-colors px-2">
-                    <CoreIconGalleryThumb class="w-8 h-8 fill-slate-800"></CoreIconGalleryThumb>
-                </button>
-                <button class="hover:bg-slate-100 transition-colors px-2">
-                    <font-awesome-icon icon="fa-solid fa-gear" class="w-6 h-6 mx-1 text-slate-800" />
-                </button>
             </ScanHeader>
             <ScanReader
                 :images="pagesData?.images"

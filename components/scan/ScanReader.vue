@@ -2,8 +2,10 @@
     <div class="flex justify-center items-center flex-col cursor-pointer relative" @click="handlePageClick">
         <div
             id="previousPageOverlay"
-            class="absolute top-0 left-0 w-[40%] h-full bg-gradient-to-r from-slate-400/30 to-slate-400/0 transition-opacity opacity-0 hover:opacity-100"
-        ></div>
+            class="absolute top-0 left-0 w-[40%] h-full bg-gradient-to-r from-slate-400/30 to-slate-400/0 transition-opacity opacity-0 hover:opacity-100 flex"
+        >
+            <font-awesome-icon icon="fa-solid fa-circle-arrow-left" class="w-1/4 h-auto text-white/50 my-auto ml-5" />
+        </div>
         <template v-for="mangaPage in visiblePages" :key="mangaPage.id">
             <NuxtImg
                 v-if="mangaPage.isVisible || mangaPage.isPreloading"
@@ -39,8 +41,8 @@
         });
     });
 
-    function handlePageClick(ev) {
-        if (ev.target.id === "previousPageOverlay") {
+    function handlePageClick(ev: MouseEvent) {
+        if (ev.target instanceof Element && ev.target.id === "previousPageOverlay") {
             emits("previousPage");
         } else {
             emits("nextPage");

@@ -3,35 +3,26 @@
         {{ pagesError.message }}
     </div>
     <div v-else>
-        <CoreContainer>
+        <CoreContainer class="px-3">
+            <h1 class="mt-4 font-medium text-2xl">{{ chapterData.title }}</h1>
             <NuxtLink :to="`${MANGA_FOLDER}/${route.params.serieId}`">
-                <h3 class="mt-4 text-teal-700 font-medium text-lg">{{ serieData?.serieName }}</h3>
+                <h3 class="text-teal-700 font-medium text-lg hover:underline">{{ serieData?.serieName }}</h3>
             </NuxtLink>
-            <h1 class="font-medium text-2xl">{{ chapterData.title }}</h1>
             <p class="my-4 mb-8 mx-6 sm:container text-slate-700 prose">{{ chapterData.description }}</p>
         </CoreContainer>
         <div id="mangaReader">
             <ScanHeader>
-                <NuxtLink
-                    :to="paginationCounter.previousChapterUrl.value"
-                    class="hover:bg-slate-100 transition-colors px-2"
-                    title="Chapitre précédent"
-                    >Prect</NuxtLink
-                >
                 <ScanHeaderNavigation
                     :serieNavigation="serieData"
                     @update_surrounding_urls="paginationCounter.updateSurroundingUrls"
                     titleTxt="Choix du chapitre"
                 ></ScanHeaderNavigation>
-                <NuxtLink
-                    :to="paginationCounter.nextChapterUrl.value"
-                    class="hover:bg-slate-100 transition-colors px-2"
-                    title="Chapitre suivant"
-                    >Suivr</NuxtLink
-                >
-                <div>Page {{ paginationCounter.currentPageIndex }} dd</div>
-                <button class="hover:bg-slate-100 transition-colors px-2">Tmbs</button>
-                <button class="hover:bg-slate-100 transition-colors px-2">Settgs</button>
+                <div class="border-l border-slate-200 mx-2 my-2"></div>
+                <ScanHeaderPageSelector
+                    :current-page-index="paginationCounter.currentPageIndex.value"
+                    :totalPages="paginationCounter.pagesCount.value"
+                    @set-page="paginationCounter.setPage"
+                ></ScanHeaderPageSelector>
             </ScanHeader>
             <ScanReader
                 :images="pagesData?.images"

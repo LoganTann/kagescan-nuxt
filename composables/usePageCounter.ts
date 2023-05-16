@@ -34,6 +34,9 @@ export function usePageCounter() {
             currentPageIndex.value++;
         }
     }
+    function setPage(pageIndex: number) {
+        currentPageIndex.value = pageIndex;
+    }
     function updateSurroundingUrls(urls: ScanSurroundingUrls) {
         const home = `${MANGA_FOLDER}/${route.params.serieId}`;
         nextChapterUrl.value = urls.nextChapterUrl || home;
@@ -56,6 +59,7 @@ export function usePageCounter() {
         previousChapterUrl,
         nextPage,
         previousPage,
+        setPage,
         updateSurroundingUrls
     };
 }

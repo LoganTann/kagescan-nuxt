@@ -5,4 +5,10 @@
         <LandingCommunityContainer></LandingCommunityContainer>
     </main>
 </template>
+<script setup lang="ts">
+    useHead({
+        title: "Kagescan - Communauté française Kagerou Project",
+        meta: [],
+    });
+</script>
 <style></style>

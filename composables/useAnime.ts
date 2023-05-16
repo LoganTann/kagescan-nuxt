@@ -1,4 +1,4 @@
-import type { ParsedContentMeta } from "@nuxt/content/dist/runtime/types";
+import type { ParsedContent, ParsedContentMeta } from "@nuxt/content/dist/runtime/types";
 
 /**
  * Returns all the data needed for an anime episode page (route : /anime/[serieId]/[episodeId])
@@ -8,7 +8,7 @@ import type { ParsedContentMeta } from "@nuxt/content/dist/runtime/types";
  * @return array having the content of the episode in {episodeData} and the serie metadata with episode list in {serieData}
  */
 export function useAnimeData(serieId: string, episodeId?: string) {
-    const episodeData = ref<AnimeEpisodeMetadata>();
+    const episodeData = ref<AnimeEpisodeMetadataWithBody>();
     const serieData = ref<AnimeSerieWithEpisodeList>();
 
     fetchAnimeSerie(serieId)
@@ -16,6 +16,7 @@ export function useAnimeData(serieId: string, episodeId?: string) {
     if (episodeId) {
         fetchAnimeEpisode(serieId, episodeId)
             .then((data) => episodeData.value = data);
+        useContentHead(episodeData as Ref<ParsedContent>);
     }
 
     return { episodeData, serieData };
@@ -87,6 +88,7 @@ async function fetchAnimeSerie(serieId: string): Promise<AnimeSerieWithEpisodeLi
             }
         })
         .find() as AnimeEpisodeOrSerieArray;
+
     const serie: AnimeSerieWithEpisodeList = {
         title: "",
         subtitle: "",
@@ -113,8 +115,10 @@ async function fetchAnimeSerie(serieId: string): Promise<AnimeSerieWithEpisodeLi
     return serie;
 }
 
-async function fetchAnimeEpisode(serieId: string, episodeId: string): Promise<AnimeEpisodeMetadata> {
+async function fetchAnimeEpisode(serieId: string, episodeId: string): Promise<AnimeEpisodeMetadataWithBody> {
     const serieUrl = buildAnimePath(serieId, episodeId);
-    const episodeAndSerie = await queryContent<AnimeEpisodeMetadata>(serieUrl).findOne();
+    const episodeAndSerie = await queryContent<AnimeEpisodeMetadataWithBody>(serieUrl).findOne();
     return episodeAndSerie;
 }
+
+export type AnimeEpisodeMetadataWithBody = AnimeEpisodeMetadata & ParsedContent;

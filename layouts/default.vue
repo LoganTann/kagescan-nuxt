@@ -5,7 +5,7 @@
         <div class="grow">
             <slot />
         </div>
-        <footer v-if="isFooterVisible">Kagescan</footer>
+        <CoreFooter v-if="isFooterVisible"> </CoreFooter>
     </div>
 </template>
 <script setup lang="ts">

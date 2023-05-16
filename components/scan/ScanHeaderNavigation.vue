@@ -1,39 +1,55 @@
 <template>
-    <CoreDropdownContainer :is-dropdown="true">
-        <template #title>
-            <div
-                :title="props.titleTxt"
-                class="flex items-center px-2 py-2 hover:bg-slate-100 transition-colors min-w-[20rem] h-full"
-            >
-                <nuxt-img :src="processedChapterData.coverSrc" :width="30"></nuxt-img>
-                <div class="grow px-2">
-                    <p class="text-sm">{{ processedChapterData.volumeName }}</p>
-                    <p>{{ processedChapterData.chapterName }}</p>
+    <div class="inline-flex">
+        <NuxtLink
+            :to="props.previousChapterUrl"
+            class="hover:bg-slate-100 transition-colors px-2 inline-flex items-center"
+            title="Chapitre précédent"
+        >
+            <font-awesome-icon icon="fa-solid fa-arrow-left" class="w-5 h-5 text-slate-800" />
+        </NuxtLink>
+        <CoreDropdownContainer :is-dropdown="true">
+            <template #title>
+                <div
+                    :title="props.titleTxt"
+                    class="flex items-center px-2 py-2 hover:bg-slate-100 transition-colors min-w-[20rem] h-full"
+                >
+                    <nuxt-img :src="processedChapterData.coverSrc" :width="30"></nuxt-img>
+                    <div class="grow px-2">
+                        <p class="text-sm">{{ processedChapterData.volumeName }}</p>
+                        <p>{{ processedChapterData.chapterName }}</p>
+                    </div>
+                    <CoreIconContainer icon="chevronDown" class="inline"></CoreIconContainer>
                 </div>
-                <CoreIconContainer icon="chevronDown" class="inline"></CoreIconContainer>
-            </div>
-        </template>
-        <template #default>
-            <div class="bg-white flex flex-col shadow border">
-                <div class="px-4 py-2 text-center text-sm text-slate-700">Listes des chapitres</div>
-                <div class="flex flex-col font-medium text-sm overflow-y-scroll max-h-52">
-                    <template v-for="chapter in processedChapterData.chapters" :key="chapter.key">
-                        <NuxtLink
-                            v-if="chapter.kind === 'nuxtLink'"
-                            :to="chapter.to"
-                            class="px-4 py-2 pl-6 bg-slate-50 hover:bg-slate-100 transition-all border-t border-slate-200"
-                            :class="{ 'shadow-inner text-teal-400 border-l-4 border-l-teal-400': chapter.active }"
-                        >
-                            {{ chapter.name }}
-                        </NuxtLink>
-                        <div v-else class="px-4 py-2 bg-white font-semibold border-t border-slate-200">
-                            {{ chapter.name }}
-                        </div>
-                    </template>
+            </template>
+            <template #default>
+                <div class="bg-white flex flex-col shadow border">
+                    <div class="px-4 py-2 text-center text-sm text-slate-700">Listes des chapitres</div>
+                    <div class="flex flex-col font-medium text-sm overflow-y-scroll max-h-52">
+                        <template v-for="chapter in processedChapterData.chapters" :key="chapter.key">
+                            <NuxtLink
+                                v-if="chapter.kind === 'nuxtLink'"
+                                :to="chapter.to"
+                                class="px-4 py-2 pl-6 bg-slate-50 hover:bg-slate-100 transition-all border-t border-slate-200"
+                                :class="{ 'shadow-inner text-teal-400 border-l-4 border-l-teal-400': chapter.active }"
+                            >
+                                {{ chapter.name }}
+                            </NuxtLink>
+                            <div v-else class="px-4 py-2 bg-white font-semibold border-t border-slate-200">
+                                {{ chapter.name }}
+                            </div>
+                        </template>
+                    </div>
                 </div>
-            </div>
-        </template>
-    </CoreDropdownContainer>
+            </template>
+        </CoreDropdownContainer>
+        <NuxtLink
+            :to="props.nextChapterUrl"
+            class="hover:bg-slate-100 transition-colors px-2 inline-flex items-center"
+            title="Chapitre suivant"
+        >
+            <font-awesome-icon icon="fa-solid fa-arrow-right" class="w-5 h-5 text-slate-800" />
+        </NuxtLink>
+    </div>
 </template>
 <script setup lang="ts">
     import { ScanSurroundingUrls } from "~/composables/usePageCounter";
@@ -45,6 +61,8 @@
     const props = defineProps<{
         serieNavigation: MangaVolumeApiResponse | null;
         titleTxt?: string;
+        nextChapterUrl: string;
+        previousChapterUrl: string;
     }>();
     const route = useRoute();
 
@@ -93,7 +111,8 @@
     watchArray(
         () => processedChapterData.value.chapters,
         (chapters) => {
-            emits("update_surrounding_urls", getSurroundings(chapters));
+            const chaptersOnly: Option[] = chapters.filter((chapter): chapter is Option => chapter.kind === "nuxtLink");
+            emits("update_surrounding_urls", getSurroundings(chaptersOnly));
         },
         { immediate: true }
     );
@@ -102,7 +121,7 @@
      * Returns the surrounding urls of the chapter having the "active" property set to true.
      * @private
      */
-    function getSurroundings(chapters: (Option | OptionGroup)[]): ScanSurroundingUrls {
+    function getSurroundings(chapters: Option[]): ScanSurroundingUrls {
         const result = {
             nextChapterUrl: "",
             previousChapterUrl: "",
@@ -111,24 +130,11 @@
         if (chapters.length === 0 || currentChapterIndex === -1) {
             return result;
         }
-
-        let previousIndex = currentChapterIndex;
-        let nextIndex = currentChapterIndex;
-        while (previousIndex >= 0) {
-            previousIndex--;
-            const prev = chapters[previousIndex];
-            if (prev?.kind === "nuxtLink") {
-                result.previousChapterUrl = prev.to;
-                break;
-            }
+        if (currentChapterIndex > 0) {
+            result.previousChapterUrl = chapters[currentChapterIndex - 1].to;
         }
-        while (nextIndex < chapters.length) {
-            nextIndex++;
-            const next = chapters[nextIndex];
-            if (next?.kind === "nuxtLink") {
-                result.nextChapterUrl = next.to;
-                break;
-            }
+        if (currentChapterIndex < chapters.length - 1) {
+            result.nextChapterUrl = chapters[currentChapterIndex + 1].to;
         }
         return result;
     }

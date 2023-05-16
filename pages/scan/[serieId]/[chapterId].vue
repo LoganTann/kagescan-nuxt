@@ -12,26 +12,26 @@
         </CoreContainer>
         <div id="mangaReader">
             <ScanHeader>
-                <NuxtLink
-                    :to="paginationCounter.previousChapterUrl.value"
-                    class="hover:bg-slate-100 transition-colors px-2"
-                    title="Chapitre précédent"
-                    >Prect</NuxtLink
-                >
                 <ScanHeaderNavigation
                     :serieNavigation="serieData"
+                    :previous-chapter-url="paginationCounter.previousChapterUrl.value"
+                    :next-chapter-url="paginationCounter.nextChapterUrl.value"
                     @update_surrounding_urls="paginationCounter.updateSurroundingUrls"
                     titleTxt="Choix du chapitre"
                 ></ScanHeaderNavigation>
-                <NuxtLink
-                    :to="paginationCounter.nextChapterUrl.value"
-                    class="hover:bg-slate-100 transition-colors px-2"
-                    title="Chapitre suivant"
-                    >Suivr</NuxtLink
-                >
-                <div>Page {{ paginationCounter.currentPageIndex }} dd</div>
-                <button class="hover:bg-slate-100 transition-colors px-2">Tmbs</button>
-                <button class="hover:bg-slate-100 transition-colors px-2">Settgs</button>
+                <div class="border-l border-slate-200 mx-2 my-2"></div>
+                <ScanHeaderPageSelector
+                    :current-page-index="paginationCounter.currentPageIndex.value"
+                    :totalPages="paginationCounter.pagesCount.value"
+                    @set-page="paginationCounter.setPage"
+                ></ScanHeaderPageSelector>
+                <div class="border-l border-slate-200 mx-2 my-2"></div>
+                <button class="hover:bg-slate-100 transition-colors px-2">
+                    <CoreIconGalleryThumb class="w-8 h-8 fill-slate-800"></CoreIconGalleryThumb>
+                </button>
+                <button class="hover:bg-slate-100 transition-colors px-2">
+                    <font-awesome-icon icon="fa-solid fa-gear" class="w-6 h-6 mx-1 text-slate-800" />
+                </button>
             </ScanHeader>
             <ScanReader
                 :images="pagesData?.images"

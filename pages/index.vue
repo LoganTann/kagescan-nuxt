@@ -1,6 +1,6 @@
 <template>
     <LandingMainBanner class="fixed top-20 w-full h-[420px] z-1" />
-    <main class="relative mt-[420px] z-2 bg-white">
+    <main class="relative mt-[420px] z-2 bg-white pb-14">
         <LandingNews></LandingNews>
         <LandingKageproContainer></LandingKageproContainer>
         <LandingCommunityContainer></LandingCommunityContainer>

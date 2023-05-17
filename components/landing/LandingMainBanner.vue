@@ -12,25 +12,23 @@
                 poster="~/assets/video/landing_anim.jpg"
             ></video>
         </div>
-        <div class="absolute top-0 left-0 w-full h-full p-8 text-white text-center">
-            <div :style="animatedStyles.mainText">
+        <div class="absolute top-0 left-0 w-full h-full p-8 text-white text-center" :style="animatedStyles.opacity">
+            <div>
                 <h1 class="xl:text-3xl md:text-2xl text-xl font-bold">Plongez dans l'univers du Kagerou Project</h1>
                 <p class="xl:text-2xl md:text-xl font-semibold">et découvrez un fandom plus qu'ambitieux !</p>
             </div>
-            <p
-                class="xl:text-2xl md:text-xl text-red-200 md:w-[50rem] max-w-full mx-auto font-medium"
-                :style="animatedStyles.secondaryText"
-            >
+            <p class="xl:text-2xl md:text-xl text-red-200 md:w-[50rem] max-w-full mx-auto font-medium">
                 <br />
                 Kagescan regroupe l'ensemble des traductions françaises de la série, ainsi que diverses ressources pour
                 découvrir notre communauté
             </p>
-
-            <div class="flex justify-center w-full mt-4">
-                <CoreButton to="/scan">Lire le manga</CoreButton>
-                <CoreButton to="/anime">Regarder l'animé</CoreButton>
-                <CoreButton to="/novel">Lire le roman</CoreButton>
-                <CoreButton to="/music">Ecouter les musiques</CoreButton>
+            <div class="flex justify-center w-full mt-6 flex-wrap text-sm sm:text-base">
+                <CoreButton class="mt-2" variant="large" to="/scan" icon="fa-regular fa-comments">Mangas</CoreButton>
+                <CoreButton class="mt-2" variant="large" to="/anime" icon="fa-regular fa-circle-play">Animés</CoreButton>
+                <CoreButton class="mt-2" variant="large" to="/novel" icon="fa-solid fa-book">Romans</CoreButton>
+                <CoreButton class="mt-2" variant="large" to="/music" icon="fa-solid fa-record-vinyl">
+                    Musiques
+                </CoreButton>
             </div>
         </div>
     </header>
@@ -49,8 +47,7 @@
         }
         return {
             video: `transform: scale(1.${String(scaleDecimals).padStart(3, "0")}) translateY(${parallaxY}px)`,
-            mainText: `opacity: ${Number(opacity).toFixed(3)}`,
-            secondaryText: `opacity: ${Number(opacity).toFixed(3)}`,
+            opacity: `opacity: ${Number(opacity).toFixed(3)}`,
         };
     });
 </script>

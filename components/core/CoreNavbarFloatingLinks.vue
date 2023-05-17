@@ -23,7 +23,7 @@
                         class="flex items-center p-2 hover:bg-slate-200 rounded-md"
                     >
                         <div class="rounded w-8 h-8 p-2 bg-teal-600">
-                            <CoreIconBubble class="fill-white"></CoreIconBubble>
+                            <font-awesome-icon class="w-4 h-4" icon="fa-solid fa-chevron-down" />
                         </div>
                         <div class="pl-2">{{ link.name }}</div>
                     </NuxtLink>

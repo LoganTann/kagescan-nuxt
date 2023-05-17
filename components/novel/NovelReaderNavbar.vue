@@ -5,7 +5,7 @@
                 <span>{{ props.currentVolumeData?.serieName }}</span>
             </NuxtLink>
             <div class="mx-2 self-center hidden sm:block">
-                <CoreIconContainer icon="chevronDown" class="-rotate-90"></CoreIconContainer>
+                <font-awesome-icon icon="fa-solid fa-chevron-right" class="w-4 h-4" />
             </div>
             <div>
                 <CoreDropdownContainer :is-dropdown="true" class="">
@@ -16,7 +16,7 @@
                             <nuxt-img :src="props.currentVolumeData?.currentVolume.cover" :width="30"></nuxt-img>
                             <p class="px-2">{{ props.currentVolumeData?.currentVolume.title }}</p>
                             <div class="grow"></div>
-                            <CoreIconContainer icon="chevronDown" class="inline"></CoreIconContainer>
+                            <font-awesome-icon icon="fa-solid fa-chevron-down" class="w-4 h-4 inline" />
                         </div>
                     </template>
                     <template #default>
@@ -43,10 +43,10 @@
                                         :to="props.currentVolumeData.previousVolume.path"
                                     >
                                         <p>
-                                            <CoreIconContainer
-                                                icon="chevronDown"
-                                                class="inline rotate-90 scale-75"
-                                            ></CoreIconContainer>
+                                            <font-awesome-icon
+                                                icon="fa-solid fa-chevron-left"
+                                                class="inline w-4 h-4 scale-75"
+                                            />
                                             Volume précédent
                                         </p>
                                         <nuxt-img
@@ -67,10 +67,10 @@
                                     >
                                         <p>
                                             Volume suivant
-                                            <CoreIconContainer
-                                                icon="chevronDown"
-                                                class="inline -rotate-90 scale-75"
-                                            ></CoreIconContainer>
+                                            <font-awesome-icon
+                                                icon="fa-solid fa-chevron-right"
+                                                class="inline w-4 h-4 scale-75"
+                                            />
                                         </p>
                                         <nuxt-img
                                             :src="props.currentVolumeData.nextVolume.cover"

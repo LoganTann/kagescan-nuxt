@@ -44,8 +44,10 @@
         </div>
         <p class="pb-7 md:pb-16 pt-4">
             <a href="#" class="inline-block transition-all transform hover:-translate-y-1">
-                <font-awesome-icon class="w-3 h-3 inline" icon="fa-solid fa-chevron-up" />
-                <span> Revenir en haut de la page </span>
+                <span>
+                    <font-awesome-icon class="w-3 h-3 inline" icon="fa-solid fa-chevron-up" />
+                </span>
+                Revenir en haut de la page
             </a>
         </p>
     </CoreContainer>

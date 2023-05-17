@@ -5,6 +5,7 @@ export default <Partial<Config>>{
     theme: {
         fontFamily: {
             sans: 'Raleway',
+            mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace'
         },
     },
     safelist: [

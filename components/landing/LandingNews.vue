@@ -12,5 +12,8 @@
                 class="w-full max-w-xl aspect-[6/5] m-auto outline-none"
             ></iframe>
         </div>
+
+        <h3 class="pt-6 md:text-5xl text-3xl font-bold">Nos réseaux sociaux</h3>
+        <p class="pt-4">TODO : mettre à droite avec des icones. Youtube, Twitter, Discord, Instagram, Wikia</p>
     </CoreContainer>
 </template>

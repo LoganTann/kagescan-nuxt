@@ -25,6 +25,13 @@
                 Kagescan regroupe l'ensemble des traductions françaises de la série, ainsi que diverses ressources pour
                 découvrir notre communauté
             </p>
+
+            <div class="flex justify-center w-full mt-4">
+                <CoreButton to="/scan">Lire le manga</CoreButton>
+                <CoreButton to="/anime">Regarder l'animé</CoreButton>
+                <CoreButton to="/novel">Lire le roman</CoreButton>
+                <CoreButton to="/music">Ecouter les musiques</CoreButton>
+            </div>
         </div>
     </header>
 </template>

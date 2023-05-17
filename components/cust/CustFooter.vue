@@ -12,10 +12,13 @@
                 <h4 class="text-xl font-medium">Voir aussi</h4>
                 <ul class="text-gray-800">
                     <li>
-                        <NuxtLink to="https://github.com/Kagescan" class="hover:underline"> Kagescan-cms </NuxtLink>
+                        <NuxtLink to="/about/legal" class="hover:underline"> Mentions légales </NuxtLink>
                     </li>
                     <li>
-                        <NuxtLink to="#" class="hover:underline"> Mentions légales </NuxtLink>
+                        <NuxtLink to="/about/faq" class="hover:underline"> FAQ traductions </NuxtLink>
+                    </li>
+                    <li>
+                        <NuxtLink to="/fangame" class="hover:underline">Le fangame (projet inactif)</NuxtLink>
                     </li>
                 </ul>
             </div>
@@ -31,9 +34,6 @@
                             class="hover:underline"
                             >Wiki français Kagerou Project</NuxtLink
                         >
-                    </li>
-                    <li>
-                        <NuxtLink to="/fangame" class="hover:underline">Le fangame (projet inactif)</NuxtLink>
                     </li>
                     <li>
                         <NuxtLink to="http://mekakushidan.com/" class="hover:underline"

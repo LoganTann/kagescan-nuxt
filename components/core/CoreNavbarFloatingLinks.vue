@@ -37,9 +37,9 @@
         {
             sectionName: "Découvrir",
             sectionData: [
-                { to: "#/about/kagerou_project", name: "Kagerou Project" },
-                { to: "#/about/kagescan", name: "Kagescan" },
-                { to: "#/about/projects", name: "Projets transverses" },
+                { to: "/about/kagerou_project", name: "Kagerou Project" },
+                { to: "/about/kagescan", name: "Kagescan" },
+                { to: "/about/projects", name: "Projets transverses" },
             ],
         },
         {
@@ -48,15 +48,17 @@
                 { to: "/scan", name: "Le manga" },
                 { to: "/anime", name: "L'animé" },
                 { to: "/novel", name: "Le roman" },
-                { to: "#/music", name: "Les musiques" },
+                { to: "/music", name: "Les musiques" },
             ],
         },
         {
             sectionName: "Explorer",
             sectionData: [
-                { to: "#/discord", name: "Notre discord" },
-                { to: "https://twitter.com/KagerouDaysFr/", name: "Notre twitter" },
+                { to: "/discord", name: "Le discord" },
                 { to: "https://kagerouproject.fandom.com/wiki/fr", name: "Le wiki français" },
+                { to: "https://twitter.com/KagerouDaysFr/", name: "Notre twitter" },
+                { to: "https://www.instagram.com/kagerouproject_fr/", name: "Notre insta" },
+                { to: "https://youtube.com/Kagescanfr", name: "La chaîne YT" },
             ],
         },
     ]);

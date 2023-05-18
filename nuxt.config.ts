@@ -35,7 +35,8 @@ export default defineNuxtConfig({
     ],
 
     css: [
-        "@/assets/commons.scss"
+        "@/assets/commons.scss",
+        '@fortawesome/fontawesome-svg-core/styles.css'
     ],
 
     image: {

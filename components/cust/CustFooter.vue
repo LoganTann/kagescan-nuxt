@@ -8,7 +8,7 @@
                 </p>
             </div>
             <div class="">
-                <h4 class="text-xl font-medium">Voir aussi</h4>
+                <h4 class="text-base font-medium">Voir aussi</h4>
                 <ul class="text-gray-800 ulGap text-sm">
                     <li>
                         <NuxtLink to="/about/legal" class="hover:underline"> Mentions légales </NuxtLink>
@@ -22,7 +22,7 @@
                 </ul>
             </div>
             <div>
-                <h4 class="text-xl font-medium">Sites liés</h4>
+                <h4 class="text-base font-medium">Sites liés</h4>
                 <ul class="text-gray-800 ulGap text-sm">
                     <li>
                         <NuxtLink to="https://soup.kagescan.fr/" class="hover:underline">Redbeansoup supremacy</NuxtLink>

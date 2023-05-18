@@ -11,3 +11,9 @@ body,
 [aria-describedby="footnote-label"] {
     scroll-margin-top: 4rem;
 }
+
+@font-face {
+    font-family: "Raleway";
+    src: url('@/assets/fonts/Raleway-VariableFont_wght.ttf') format("truetype");
+    font-display: swap;
+}

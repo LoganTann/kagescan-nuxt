@@ -18,7 +18,7 @@
                         <p class="text-sm">{{ processedChapterData.volumeName }}</p>
                         <p>{{ processedChapterData.chapterName }}</p>
                     </div>
-                    <CoreIconContainer icon="chevronDown" class="inline"></CoreIconContainer>
+                    <font-awesome-icon icon="fa-solid fa-chevron-down" class="inline w-4 h-4" />
                 </div>
                 <div class="sm:hidden flex items-center h-full">
                     {{ processedChapterData.chapterShortName }}

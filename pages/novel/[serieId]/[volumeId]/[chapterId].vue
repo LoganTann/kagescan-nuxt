@@ -2,7 +2,7 @@
     <div v-if="error">
         {{ error.message }}
     </div>
-    <div v-else class="px-4 mt-2 mb-8">
+    <div v-else class="px-4 mt-2">
         <NovelReaderNavbar :current-volume-data="data"></NovelReaderNavbar>
         <div class="prose mx-auto mt-8">
             <ContentDoc v-slot="{ doc }">

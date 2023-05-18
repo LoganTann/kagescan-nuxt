@@ -1,9 +1,31 @@
 // For Nuxt 3
 import { library, config } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { fas, faArrowRight, faArrowLeft, faCircleArrowLeft, faGear } from "@fortawesome/free-solid-svg-icons";
-import { far } from "@fortawesome/free-regular-svg-icons";
-import { fab } from "@fortawesome/free-brands-svg-icons";
+import {
+    faArrowLeft,
+    faArrowRight,
+    faBook,
+    faChevronCircleRight,
+    faChevronDown,
+    faChevronLeft,
+    faChevronUp,
+    faCircleArrowLeft,
+    faCirclePlay,
+    faComment,
+    faCompactDisc,
+    faFire,
+    faGear,
+    faGlobe,
+    faPenNib,
+    faRecordVinyl,
+    fas,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+    faCirclePlay as farCirclePlay,
+    faComment as farComment,
+    far,
+    faStar as farStar,
+} from "@fortawesome/free-regular-svg-icons";
+import { fab, faTwitter, faYoutube, faInstagram, faDiscord } from "@fortawesome/free-brands-svg-icons";
 
 // This is important, we are going to let Nuxt worry about the CSS
 config.autoAddCss = false;
@@ -13,8 +35,33 @@ config.autoAddCss = false;
 library.add(fas, far, fab);
 
 /* add icons to the library */
-library.add(faArrowRight, faArrowLeft, faCircleArrowLeft, faGear);
+library.add(
+    faArrowLeft,
+    faArrowRight,
+    faBook,
+    faChevronCircleRight,
+    faChevronDown,
+    faChevronLeft,
+    faChevronUp,
+    faCircleArrowLeft,
+    faCirclePlay,
+    faComment,
+    faCompactDisc,
+    faDiscord,
+    faFire,
+    faGear,
+    faGlobe,
+    faInstagram,
+    faPenNib,
+    farCirclePlay,
+    farComment,
+    faRecordVinyl,
+    farStar,
+    faTwitter,
+    faYoutube,
+);
 
 export default defineNuxtPlugin((nuxtApp) => {
-    nuxtApp.vueApp.component("font-awesome-icon", FontAwesomeIcon, {});
+    // unused.
+    // applied fix from https://github.com/FortAwesome/vue-fontawesome/issues/447#issuecomment-1476257130
 });

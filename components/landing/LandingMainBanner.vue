@@ -8,9 +8,11 @@
                 loop
                 muted
                 playsinline
-                src="~/assets/video/landing_anim.mp4"
-                poster="~/assets/video/landing_anim.jpg"
-            ></video>
+                poster="~/assets/video/landing_anim.webp"
+            >
+                <source src="~/assets/video/landing_anim.webm" type="video/webm" />
+                <source src="~/assets/video/landing_anim.mp4" type="video/mp4" />
+            </video>
         </div>
         <div class="absolute top-0 left-0 w-full h-full p-8 text-white text-center" :style="animatedStyles.opacity">
             <div>

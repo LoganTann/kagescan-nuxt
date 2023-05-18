@@ -9,6 +9,12 @@
 <script setup lang="ts">
     useHead({
         title: "Kagescan - Communauté française Kagerou Project",
+        meta: [
+            {
+                name: "description",
+                content: "Kagescan regroupe l'ensemble des traductions de la série Kagerou Project, ainsi que diverses pages pour vous lancer dans l'univers.",
+            },
+        ],
     });
 </script>
 <style></style>

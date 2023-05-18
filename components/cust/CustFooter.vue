@@ -9,35 +9,19 @@
             </div>
             <div class="">
                 <h4 class="text-base font-medium">Voir aussi</h4>
-                <ul class="text-gray-800 ulGap text-sm">
-                    <li>
-                        <NuxtLink to="/about/legal" class="hover:underline"> Mentions légales </NuxtLink>
-                    </li>
-                    <li>
-                        <NuxtLink to="/about/faq" class="hover:underline"> FAQ traductions </NuxtLink>
-                    </li>
-                    <li>
-                        <NuxtLink to="/fangame" class="hover:underline">Le fangame (projet inactif)</NuxtLink>
+                <ul class="text-gray-800 text-sm pt-1">
+                    <li v-for="link in links.seeAlso" class="mt-2">
+                        <NuxtLink :to="link.link" class="hover:underline p-1">
+                            {{ link.name }}
+                        </NuxtLink>
                     </li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-base font-medium">Sites liés</h4>
-                <ul class="text-gray-800 ulGap text-sm">
-                    <li>
-                        <NuxtLink to="https://soup.kagescan.fr/" class="hover:underline">Redbeansoup supremacy</NuxtLink>
-                    </li>
-                    <li>
-                        <NuxtLink
-                            to="https://kagerouproject.fandom.com/fr/wiki/Kagerou_Project_Accueil"
-                            class="hover:underline"
-                            >Wiki français Kagerou Project</NuxtLink
-                        >
-                    </li>
-                    <li>
-                        <NuxtLink to="http://mekakushidan.com/" class="hover:underline"
-                            >Site officiel du Kagerou Project (jp)</NuxtLink
-                        >
+                <ul class="text-gray-800 text-sm pt-1">
+                    <li v-for="link in links.relatedSites" class="mt-2">
+                        <NuxtLink :to="link.link" class="hover:underline p-1">{{ link.name }}</NuxtLink>
                     </li>
                 </ul>
             </div>
@@ -52,9 +36,35 @@
         </p>
     </CoreContainer>
 </template>
-<script setup lang="ts"></script>
-<style scoped lang="scss">
-    .ulGap li {
-        margin-top: 0.3rem;
-    }
-</style>
+<script setup lang="ts">
+    const links = {
+        seeAlso: [
+            {
+                name: "Mentions légales",
+                link: "/about/legal",
+            },
+            {
+                name: "FAQ traductions",
+                link: "/about/faq",
+            },
+            {
+                name: "Le fangame (projet inactif)",
+                link: "/fangame",
+            },
+        ],
+        relatedSites: [
+            {
+                name: "Redbeansoup supremacy",
+                link: "https://soup.kagescan.fr/",
+            },
+            {
+                name: "Wiki français Kagerou Project",
+                link: "https://kagerouproject.fandom.com/fr/wiki/Kagerou_Project_Accueil",
+            },
+            {
+                name: "Site officiel du Kagerou Project (jp)",
+                link: "http://mekakushidan.com/",
+            },
+        ],
+    };
+</script>

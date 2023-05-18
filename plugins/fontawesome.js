@@ -1,6 +1,5 @@
 // For Nuxt 3
 import { library, config } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
     fas,
     faChevronDown,
@@ -49,6 +48,6 @@ library.add(
 );
 
 export default defineNuxtPlugin((nuxtApp) => {
-    // unused:   nuxtApp.vueApp.component("font-awesome-icon", FontAwesomeIcon, {});
+    // unused.
     // applied fix from https://github.com/FortAwesome/vue-fontawesome/issues/447#issuecomment-1476257130
 });

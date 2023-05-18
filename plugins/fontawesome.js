@@ -1,22 +1,30 @@
 // For Nuxt 3
 import { library, config } from "@fortawesome/fontawesome-svg-core";
 import {
-    fas,
-    faChevronDown,
-    faChevronUp,
-    faChevronLeft,
-    faChevronCircleRight,
-    faArrowRight,
     faArrowLeft,
-    faCircleArrowLeft,
-    faGear,
-    faFire,
+    faArrowRight,
     faBook,
-    faComment,
-    faRecordVinyl,
+    faChevronCircleRight,
+    faChevronDown,
+    faChevronLeft,
+    faChevronUp,
+    faCircleArrowLeft,
     faCirclePlay,
+    faComment,
+    faCompactDisc,
+    faFire,
+    faGear,
+    faGlobe,
+    faPenNib,
+    faRecordVinyl,
+    fas,
 } from "@fortawesome/free-solid-svg-icons";
-import { far } from "@fortawesome/free-regular-svg-icons";
+import {
+    faCirclePlay as farCirclePlay,
+    faComment as farComment,
+    far,
+    faStar as farStar,
+} from "@fortawesome/free-regular-svg-icons";
 import { fab, faTwitter, faYoutube, faInstagram, faDiscord } from "@fortawesome/free-brands-svg-icons";
 
 // This is important, we are going to let Nuxt worry about the CSS
@@ -28,23 +36,29 @@ library.add(fas, far, fab);
 
 /* add icons to the library */
 library.add(
-    faArrowRight,
     faArrowLeft,
-    faCircleArrowLeft,
-    faGear,
-    faFire,
+    faArrowRight,
     faBook,
-    faComment,
-    faRecordVinyl,
+    faChevronCircleRight,
+    faChevronDown,
+    faChevronLeft,
+    faChevronUp,
+    faCircleArrowLeft,
     faCirclePlay,
+    faComment,
+    faCompactDisc,
+    faDiscord,
+    faFire,
+    faGear,
+    faGlobe,
+    faInstagram,
+    faPenNib,
+    farCirclePlay,
+    farComment,
+    faRecordVinyl,
+    farStar,
     faTwitter,
     faYoutube,
-    faInstagram,
-    faDiscord,
-    faChevronDown,
-    faChevronUp,
-    faChevronLeft,
-    faChevronCircleRight
 );
 
 export default defineNuxtPlugin((nuxtApp) => {

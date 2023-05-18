@@ -28,7 +28,7 @@
                 <CoreButton class="mt-2" variant="large" to="/scan" icon="fa-regular fa-comments">Mangas</CoreButton>
                 <CoreButton class="mt-2" variant="large" to="/anime" icon="fa-regular fa-circle-play">Animés</CoreButton>
                 <CoreButton class="mt-2" variant="large" to="/novel" icon="fa-solid fa-book">Romans</CoreButton>
-                <CoreButton class="mt-2" variant="large" to="/music" icon="fa-solid fa-record-vinyl">
+                <CoreButton class="mt-2" variant="large" to="/music" icon="fa-solid fa-compact-disc">
                     Musiques
                 </CoreButton>
             </div>

@@ -28,7 +28,10 @@
                         >
                             <font-awesome-icon class="w-4 h-4 text-white" :icon="link.icon" />
                         </div>
-                        <div class="pl-2">{{ link.name }}</div>
+                        <div class="pl-2">
+                            {{ link.name }}
+                            <CoreIconExternal :autodetect="link.to"></CoreIconExternal>
+                        </div>
                     </NuxtLink>
                 </div>
             </div>

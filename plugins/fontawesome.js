@@ -17,6 +17,7 @@ import {
     faGlobe,
     faPenNib,
     faRecordVinyl,
+    faArrowUpRightFromSquare,
     fas,
 } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -59,6 +60,7 @@ library.add(
     farStar,
     faTwitter,
     faYoutube,
+    faArrowUpRightFromSquare
 );
 
 export default defineNuxtPlugin((nuxtApp) => {

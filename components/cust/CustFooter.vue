@@ -13,6 +13,7 @@
                     <li v-for="link in links.seeAlso" class="mt-2">
                         <NuxtLink :to="link.link" class="hover:underline p-1">
                             {{ link.name }}
+                            <CoreIconExternal :autodetect="link.link"></CoreIconExternal>
                         </NuxtLink>
                     </li>
                 </ul>
@@ -21,7 +22,10 @@
                 <h4 class="text-base font-medium">Sites liés</h4>
                 <ul class="text-gray-800 text-sm pt-1">
                     <li v-for="link in links.relatedSites" class="mt-2">
-                        <NuxtLink :to="link.link" class="hover:underline p-1">{{ link.name }}</NuxtLink>
+                        <NuxtLink :to="link.link" class="hover:underline p-1">
+                            {{ link.name }}
+                            <CoreIconExternal :autodetect="link.link"></CoreIconExternal>
+                        </NuxtLink>
                     </li>
                 </ul>
             </div>

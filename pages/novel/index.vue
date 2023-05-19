@@ -1,5 +1,7 @@
-<template></template>
-<script setup lang="ts">
-    // not implemented
-    navigateTo("/novel/kagerou-daze/vol01/kagerou-daze-i");
-</script>
+<template>    
+    <div class="px-4 mt-2">
+        <div class="prose mx-auto mt-8">
+            <ContentDoc></ContentDoc>
+        </div>
+    </div>
+</template>

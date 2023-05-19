@@ -1,5 +1,7 @@
-<template></template>
-<script setup lang="ts">
-    // not implemented
-    navigateTo("/scan/kagerou-daze/10#mangaReader");
-</script>
+<template>    
+    <div class="px-4 mt-2">
+        <div class="prose mx-auto mt-8">
+            <ContentDoc></ContentDoc>
+        </div>
+    </div>
+</template>

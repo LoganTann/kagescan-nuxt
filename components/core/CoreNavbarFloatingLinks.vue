@@ -61,9 +61,9 @@
         {
             sectionName: "Regarder",
             sectionData: [
-                { to: "/scan/kagerou-daze", name: "Le manga", icon: "fa-solid fa-comments", color: "#0d9488" },
-                { to: "/anime/mekakucity-actors/jinzou-enemy", name: "L'animé", icon: "fa-solid fa-circle-play", color: "#14b8a6" },
-                { to: "/novel/kagerou-daze", name: "Le roman", icon: "fa-solid fa-book", color: "#2dd4bf" },
+                { to: "/scan", name: "Le manga", icon: "fa-solid fa-comments", color: "#0d9488" },
+                { to: "/anime", name: "L'animé", icon: "fa-solid fa-circle-play", color: "#14b8a6" },
+                { to: "/novel", name: "Le roman", icon: "fa-solid fa-book", color: "#2dd4bf" },
                 { to: "/music", name: "Les musiques", icon: "fa-solid fa-compact-disc", color: "#5eead4" },
             ],
         },

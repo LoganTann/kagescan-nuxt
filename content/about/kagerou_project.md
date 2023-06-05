@@ -5,4 +5,4 @@ description: Envie de découvrir Kagerou Project? Nous faisons un tour sur le co
 
 # Qu'est-ce que Kagerou Project?
 
-<img src="/uat.png" width="400" heigth="73" alt="Kagescan User Acceptance Testing - Page en cours de construction"/>
+À rédiger

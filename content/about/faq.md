@@ -5,8 +5,8 @@ description: Mur des questions fréquemment posées à propos de nos traductions
 
 # FAQ
 
-<img src="/uat.png" width="400" heigth="73" alt="Kagescan User Acceptance Testing - Page en cours de construction"/>
+À rédiger
 
 # Autorisations de traduction
 
-<img src="/uat.png" width="400" heigth="73" alt="Kagescan User Acceptance Testing - Page en cours de construction"/>
+À rédiger

@@ -22,7 +22,7 @@
                     <template #default>
                         <div class="bg-white flex flex-col shadow border">
                             <div class="px-4 py-2 text-center text-sm text-slate-700">Table des matières</div>
-                            <div class="flex flex-col font-semibold text-sm overflow-y-scroll max-h-52">
+                            <div class="flex flex-col font-semibold text-sm overflow-y-scroll max-h-64">
                                 <NuxtLink
                                     v-for="chapter in chapters"
                                     :key="chapter.id"

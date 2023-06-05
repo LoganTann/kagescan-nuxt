@@ -5,8 +5,8 @@ description: histoire rapide du projet Kagescan et mur des contributeurs
 
 # Qui sommes nous ?
 
-À rédiger
+<img src="/uat.png" width="400" heigth="73" alt="Kagescan User Acceptance Testing - Page en cours de construction"/>
 
 # Mur des contributeurs
 
-À rédiger
+<img src="/uat.png" width="400" heigth="73" alt="Kagescan User Acceptance Testing - Page en cours de construction"/>

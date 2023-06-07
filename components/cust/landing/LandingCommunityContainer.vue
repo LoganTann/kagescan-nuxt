@@ -8,7 +8,7 @@
         </p>
 
         <div class="flex flex-col lg:grid lg:grid-cols-3 gap-4">
-            <LandingCommunityActivity
+            <CustLandingCommunityActivity
                 blockTitle="Représenter la communauté française"
                 :image="socialIcon"
                 imagesrc="translation icon"
@@ -16,8 +16,8 @@
                 linkUrl="/about/kagescan"
             >
                 En administrant les réseaux sociaux et en participant activement aux activités communautaires.
-            </LandingCommunityActivity>
-            <LandingCommunityActivity
+            </CustLandingCommunityActivity>
+            <CustLandingCommunityActivity
                 blockTitle="Réaliser des scanlations (fan-traduction)"
                 :image="translateIcon"
                 imagesrc="translation icon"
@@ -26,8 +26,8 @@
             >
                 Rendre accessible librement une adaptation française de la série (car aucun média n'est à ce jour
                 officiellement traduit en français).
-            </LandingCommunityActivity>
-            <LandingCommunityActivity
+            </CustLandingCommunityActivity>
+            <CustLandingCommunityActivity
                 blockTitle="Soutenir les initiatives communautaires"
                 :image="communityIcon"
                 imagesrc="Community icon"
@@ -36,7 +36,7 @@
             >
                 Utiliser nos compétences pour aller plus loin que ce site, tel que le développement d'un bot discord ou
                 d'un fangame.
-            </LandingCommunityActivity>
+            </CustLandingCommunityActivity>
         </div>
 
         <p class="mt-8 text-xl text-slate-500 font-medium mx-auto max-w-2xl pt-8 text-center">

@@ -1,9 +1,9 @@
 <template>
-    <LandingMainBanner class="fixed top-20 w-full h-[420px] z-1" />
+    <CustLandingMainBanner class="fixed top-20 w-full h-[420px] z-1" />
     <main class="relative mt-[420px] z-2 bg-white pb-14">
-        <LandingNews></LandingNews>
-        <LandingKageproContainer></LandingKageproContainer>
-        <LandingCommunityContainer></LandingCommunityContainer>
+        <CustLandingNews></CustLandingNews>
+        <CustLandingKageproContainer></CustLandingKageproContainer>
+        <CustLandingCommunityContainer></CustLandingCommunityContainer>
     </main>
 </template>
 <script setup lang="ts">
@@ -12,7 +12,8 @@
         meta: [
             {
                 name: "description",
-                content: "Kagescan regroupe l'ensemble des traductions de la série Kagerou Project, ainsi que diverses pages pour vous lancer dans l'univers.",
+                content:
+                    "Découvrez dès aujourd'hui la série Kagerou Project, et accédez à l'ensemble des traductions françaises dans un seul endroit !",
             },
         ],
     });

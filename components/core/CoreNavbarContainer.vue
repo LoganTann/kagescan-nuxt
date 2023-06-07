@@ -1,20 +1,12 @@
 <template>
-    <nav class="bg-white/75 shadow-sm" :class="navClasses">
+    <div role="banner" class="bg-white/75 shadow-sm" :class="navClasses">
         <CoreContainer class="flex items-center h-20">
             <div class="flex items-center flex-1 justify-center md:justify-start">
-                <NuxtLink to="/">
-                    <img
-                        class="h-16 mr-4 md:h-18 lg:mr-0"
-                        src="~assets/img/core/banner_logo.webp"
-                        alt="Kagescan logo"
-                        width="111"
-                        height="64"
-                    />
-                </NuxtLink>
+                <CustLogo />
             </div>
-            <CoreNavbarFloatingLinks class="h-full hidden md:flex items-center justify-center"></CoreNavbarFloatingLinks>
+            <CustNavbarLinks class="h-full hidden md:flex items-center justify-center"></CustNavbarLinks>
         </CoreContainer>
-    </nav>
+    </div>
 </template>
 <script setup lang="ts">
     const props = defineProps<{

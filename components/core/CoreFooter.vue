@@ -8,7 +8,7 @@
                 <span
                     class="font-mono border rounded border-gray-400 bg-gray-200 text-sm p-1 px-2 scale-75 inline-block"
                 >
-                    2.0-b1
+                    2.0-b2
                 </span>
             </NuxtLink>
         </div>

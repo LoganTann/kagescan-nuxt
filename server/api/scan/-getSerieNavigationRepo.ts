@@ -43,11 +43,11 @@ function sortMangaChapters(fileA: MangaMetadata, fileB: MangaMetadata): number {
 
     const resultA = a.match(digitFollowedByDotOrUnderscore);
     const resultB = b.match(digitFollowedByDotOrUnderscore);
-    if (resultA == null || resultB == null) {
+    if (resultA === null || resultB === null) {
         return defaultResponse;
     }
-    const [_matchA, numberA, followingA] = resultA;
-    const [_matchB, numberB, followingB] = resultB;
+    const [, numberA, followingA] = resultA;
+    const [, numberB, followingB] = resultB;
 
     if ((followingA || followingB) && numberA === numberB) {
         // volumes (underscore) should always be first

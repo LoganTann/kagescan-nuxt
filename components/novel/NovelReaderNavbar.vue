@@ -92,7 +92,7 @@
     </div>
 </template>
 <script setup lang="ts">
-    import { type NovelVolumeApiResponse } from "~/server/api/novel/getVolumeData.get";
+    import { type NovelVolumeApiResponse } from "~/server/api/novel/-getVolumeDataTypes";
 
     const route = useRoute();
 

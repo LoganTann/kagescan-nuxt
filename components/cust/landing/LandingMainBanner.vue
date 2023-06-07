@@ -1,6 +1,6 @@
 <template>
     <header>
-        <div class="w-screen h-full relative overflow-hidden">
+        <div v-if="isVideoVisible" class="w-screen h-full relative overflow-hidden">
             <video
                 class="w-full h-full object-cover object-center"
                 :style="animatedStyles.video"
@@ -37,7 +37,7 @@
 </template>
 <script setup lang="ts">
     const scrollData = useScroll(process.server ? undefined : window);
-
+    const isVideoVisible = computed(() => scrollData.y.value < 500);
     const animatedStyles = computed(() => {
         const y = scrollData.y.value;
         let scaleDecimals = 400;
@@ -45,7 +45,7 @@
         let opacity = 1;
         if (y > 20) {
             opacity = Math.max(0.8 - y / 420, 0);
-            scaleDecimals = 420 - y;
+            scaleDecimals = Math.trunc(420 - y);
         }
         return {
             video: `transform: scale(1.${String(scaleDecimals).padStart(3, "0")}) translateY(${parallaxY}px)`,

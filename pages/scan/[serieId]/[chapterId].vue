@@ -3,13 +3,13 @@
         {{ pagesError.message }}
     </div>
     <div v-else>
-        <CoreContainer class="px-3">
+        <div class="px-3 mx-auto max-w-prose">
             <h1 class="mt-4 font-medium text-2xl">{{ chapterData.title }}</h1>
             <NuxtLink :to="`${MANGA_FOLDER}/${route.params.serieId}`">
                 <h3 class="text-teal-700 font-medium text-lg hover:underline">{{ serieData?.serieName }}</h3>
             </NuxtLink>
             <p class="my-4 mb-8 mx-6 sm:container text-slate-700 prose">{{ chapterData.description }}</p>
-        </CoreContainer>
+        </div>
         <div id="mangaReader">
             <ScanHeader>
                 <ScanHeaderNavigation

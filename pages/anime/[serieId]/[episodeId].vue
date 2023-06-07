@@ -1,14 +1,14 @@
 <template>
-    <main class="pt-8 mx-auto md:w-11/12 max-w-7xl px-1 sm:px-3 md:px-5">
-        <Grid row class="gap-4">
-            <Grid col="s12 l7">
+    <CoreContainer>
+        <div class="pt-8 grid grid-cols-12 gap-4">
+            <div class="col-span-12 lg:col-span-7">
                 <AnimeMainContent :page-data="pageData"></AnimeMainContent>
-            </Grid>
-            <Grid col="s12 l5">
+            </div>
+            <div class="col-span-12 lg:col-span-5">
                 <AnimeSideContent :page-data="pageData" class="pl-4" />
-            </Grid>
-        </Grid>
-    </main>
+            </div>
+        </div>
+    </CoreContainer>
 </template>
 <script setup lang="ts">
     const route = useRoute();

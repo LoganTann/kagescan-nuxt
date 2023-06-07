@@ -13,3 +13,4 @@ An open-source release (Apache 2.0) is planned depending on : 1. The progress of
 1. Installing dependencies : `npm install`
 2. Running the development server : `npm run dev` and go to [localhost:3000](http://localhost:3000)
 3. Building the project : `npm run build` (`npm run preview` to preview the production build locally)
+4. Lint : `npm run lint`

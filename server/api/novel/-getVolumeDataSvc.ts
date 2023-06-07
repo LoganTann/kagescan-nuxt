@@ -34,16 +34,16 @@ export async function getVolumeData(event: H3Event, serieId: string, volumeId: s
     };
 
     for (const file of files) {
-        if (file.kgs_layout == "novel_serie") {
+        if (file.kgs_layout === "novel_serie") {
             response.serieName = file.title;
             continue;
         }
-        if (file.kgs_layout == 'novel_chapter') {
+        if (file.kgs_layout === 'novel_chapter') {
             const currentNode = buildChapterNode(file);
             response.chapters.push(currentNode);
             continue;
         }
-        if (file.kgs_layout == "novel_volume" && !response.nextVolume) {
+        if (file.kgs_layout === "novel_volume" && !response.nextVolume) {
             const currentNode = buildVolumeNode(file);
             if (response.currentVolume.id !== "") {
                 response.nextVolume = currentNode;

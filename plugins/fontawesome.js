@@ -63,7 +63,7 @@ library.add(
     faArrowUpRightFromSquare
 );
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin(() => {
     // unused.
     // applied fix from https://github.com/FortAwesome/vue-fontawesome/issues/447#issuecomment-1476257130
 });

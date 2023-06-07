@@ -5,7 +5,7 @@ import type { ParsedContent, ParsedContentMeta } from "@nuxt/content/dist/runtim
  * Error not handled at the moment
  * @param serieId the nuxt content folder name that contains the serie
  * @param episodeId the nuxt content file name of the episode
- * @return array having the content of the episode in {episodeData} and the serie metadata with episode list in {serieData}
+ * @return array having the episode content in {episodeData} and the serie metadata with episode list in {serieData}
  */
 export function useAnimeData(serieId: string, episodeId?: string) {
     const episodeData = ref<AnimeEpisodeMetadataWithBody>();
@@ -80,14 +80,15 @@ function buildAnimePath(serieId?: string, episodeId?: string) {
 
 async function fetchAnimeSerie(serieId: string): Promise<AnimeSerieWithEpisodeList> {
     const serieUrl = buildAnimePath(serieId);
-    const episodeAndSerie: AnimeEpisodeOrSerieArray = await queryContent<AnimeEpisodeMetadata | AnimeSerieMetadata>(serieUrl)
-        .without("body")
-        .where({
-            kgs_layout: {
-                $in: ['anime_episode', 'anime_page']
-            }
-        })
-        .find() as AnimeEpisodeOrSerieArray;
+    const episodeAndSerie: AnimeEpisodeOrSerieArray =
+        await queryContent<AnimeEpisodeMetadata | AnimeSerieMetadata>(serieUrl)
+            .without("body")
+            .where({
+                kgs_layout: {
+                    $in: ['anime_episode', 'anime_page']
+                }
+            })
+            .find() as AnimeEpisodeOrSerieArray;
 
     const serie: AnimeSerieWithEpisodeList = {
         title: "",
